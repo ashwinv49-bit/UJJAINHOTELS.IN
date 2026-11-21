@@ -9,9 +9,9 @@
 |---|---|
 | Live prototype | **https://hotels-ujjain.netlify.app** (noindex; prototype bar shown) |
 | Netlify project | `hotels-ujjain` (site ID `cac53e78-de6b-4f83-b28f-50d840bd97d4`), created by you today and empty until this deploy |
-| How it was deployed | Manual API deploy of `dist/` with `scripts/deploy-netlify.py`, using a personal access token saved as a network secret on this cloud environment |
+| How it deploys | ✅ **Continuous deployment from GitHub**: every push to **`main`** builds and publishes automatically (`node scripts/build.mjs --strict` → `dist/`). The first deploys were manual API uploads with `scripts/deploy-netlify.py` |
 | Verified live | All pages 200, unknown URLs 404, `/about` → `/about/` 301, CSP/HSTS/security headers served, assets cached for 1 year, no console errors at 390 px and 1440 px |
-| ⚠ Git link | The project is linked to a **Netlify-hosted Git repo** (`hotels-ujjain.git`, branch `main`), not to GitHub. A push to that repo would replace the manual deploy. Re-link it to GitHub (§2). |
+| Git link | ✅ GitHub `ashwinv49-bit/UJJAINHOTELS.IN` via the Netlify GitHub App. Production branch **`main`** (created 21 Nov 2026 at the reviewed commit). Work branches reach production through pull requests into `main`, and PRs get Deploy Previews |
 | Custom domain | ✅ **https://hotelsujjain.in** (primary). `www.hotelsujjain.in` → 301 → apex. DNS: Netlify DNS (zone `6b017c1e3f225b0b4994582d`); nameservers `dns1`–`dns4.p06.nsone.net`, set at GoDaddy (registrar) |
 | HTTPS | ✅ Let's Encrypt certificate for `hotelsujjain.in` + `*.hotelsujjain.in`, issued 21 Nov 2026, auto-renews (current expiry 19 Feb 2027). HSTS header served |
 | Verified on the domain | Home and inner pages 200, unknown URL 404, `www` → apex 301, security headers + `noindex` (pre-launch) served, canonical `https://hotelsujjain.in/`, no browser console errors |

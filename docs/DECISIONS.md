@@ -15,10 +15,10 @@ It currently takes bookings (VikBooking) and has a refund policy and terms built
 - **Recommended:** leave it untouched until the new site launches, then back it up and 301-redirect it (mapping in `DEPLOYMENT.md` §5). In the meantime, consider switching off the VikBooking search so no one tries to book.
 - Please confirm you own **both** domains and that the WordPress site is yours to change.
 
-### 3. Hosting: ✅ Netlify, prototype live at https://hotels-ujjain.netlify.app
-Deployed to your existing (empty) `hotels-ujjain` project on the Netlify Free plan. Still needed:
-- 🔒 **Link the GitHub repo** to the project (`DEPLOYMENT.md` §2). It is currently linked to a Netlify-hosted Git repo, and a push there would replace this deploy.
-- **Production branch:** there is no `main` yet. **Recommended:** I open a pull request to create `main`, and Netlify deploys `main` as production.
+### 3. Hosting: ✅ Netlify, live at https://hotelsujjain.in
+GitHub is linked; `main` is the production branch and every push to it deploys automatically. Remaining:
+- 🔒 **GitHub default branch → `main`** (GitHub → Settings → General → Default branch). This environment can't change repository settings.
+- 🔒 **Revoke the Netlify personal access token** used for the first manual deploys. Continuous deployment doesn't need it.
 - **Free-plan badge:** Netlify shows a "Powered by Netlify" badge that can't be hidden on the Free plan, and the CSP is relaxed slightly to let it render. A paid plan removes both trade-offs; this is your call before launch.
 
 ### 4. DNS for hotelsujjain.in: ✅ done
