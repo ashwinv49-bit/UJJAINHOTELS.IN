@@ -487,8 +487,13 @@
 .coming-soon > .badge {
   justify-self: start;
 }
-.coming-soon h2 {
+.coming-soon h2,
+.coming-soon h3 {
   font-size: var(--step-2);
+}
+/* Homepage "Hotel listings coming soon" card (live site, until verified listings exist) */
+.featured-empty {
+  max-width: 44rem;
 }
 .coming-soon p {
   color: var(--color-text-muted);

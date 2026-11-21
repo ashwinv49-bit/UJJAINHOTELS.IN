@@ -128,7 +128,7 @@ Mobile-first. Two breakpoints, plus the navigation switch:
 ## 7. Content and honesty rules (part of the design)
 
 1. Never invent hotel names, prices, ratings, amenities, availability or reviews.
-2. Sample content always carries a visible **Sample** badge and a section notice.
+2. Sample content always carries a visible **Sample** badge and a section notice, and appears **only in local design builds**. On every Netlify URL (the live site and Deploy Previews), the featured section shows a "Hotel listings coming soon" card instead.
 3. Paid placements are always labelled **Featured · Paid**. Affiliate links use `rel="sponsored noopener"` and a disclosure.
 4. Never imply live availability or price search. Say "Price on enquiry" or "Confirm with the hotel".
 5. Write plainly and warmly, for pilgrims, families and first-time visitors. Short sentences; Indian English spelling.

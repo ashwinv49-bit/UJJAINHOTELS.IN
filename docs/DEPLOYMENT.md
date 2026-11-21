@@ -7,7 +7,7 @@
 
 | | |
 |---|---|
-| Live prototype | **https://hotels-ujjain.netlify.app** (noindex; prototype bar shown) |
+| Live prototype | **https://hotels-ujjain.netlify.app** (noindex; prototype bar shown). **No sample hotels on any Netlify build**: the homepage shows "Hotel listings coming soon" until verified listings exist |
 | Netlify project | `hotels-ujjain` (site ID `cac53e78-de6b-4f83-b28f-50d840bd97d4`), created by you today and empty until this deploy |
 | How it deploys | ✅ **Continuous deployment from GitHub**: every push to **`main`** builds and publishes automatically (`node scripts/build.mjs --strict` → `dist/`). The first deploys were manual API uploads with `scripts/deploy-netlify.py` |
 | Verified live | All pages 200, unknown URLs 404, `/about` → `/about/` 301, CSP/HSTS/security headers served, assets cached for 1 year, no console errors at 390 px and 1440 px |
