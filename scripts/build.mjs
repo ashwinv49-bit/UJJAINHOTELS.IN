@@ -171,7 +171,10 @@ function plannedPages(data) {
     description: item.description ?? item.summary,
     intro: item.summary,
   }));
-  return [...fromCollections, ...(data.plannedPages ?? [])].filter((p) => p.path);
+  return [...fromCollections, ...(data.plannedPages ?? [])]
+    .filter((p) => p.path)
+    // previewOnly pages (e.g. /hotels/sample-listing/) exist only where sample content is shown
+    .filter((p) => !(p.previewOnly && !data.site.showSamples));
 }
 
 async function buildPages(data) {
@@ -352,6 +355,24 @@ async function writeSeoFiles(site, pages) {
   return indexable.length;
 }
 
+/**
+ * Safety rail: when samples must be hidden, fail the build if any sample
+ * marker reaches dist/. A failed Netlify build never publishes, so sample
+ * hotels can't go live by accident.
+ */
+async function assertNoSamples(data) {
+  const markers = ['data-sample="true"', '/hotels/sample-listing/', ...(data.sampleHotels ?? []).map((h) => h.name)];
+  const leaks = [];
+  for (const file of await walk(DIST)) {
+    if (!file.endsWith('.html')) continue;
+    const html = await readFile(file, 'utf8');
+    for (const m of markers) if (m && html.includes(m)) leaks.push(`${path.relative(DIST, file)} contains "${m}"`);
+  }
+  if (leaks.length) {
+    throw new Error(`Sample content found in a build where samples must be hidden:\n  • ${leaks.join('\n  • ')}`);
+  }
+}
+
 // ---------------------------------------------------------------- main
 async function main() {
   const started = Date.now();
@@ -368,7 +389,15 @@ async function main() {
     console.log(`Netlify context "${process.env.CONTEXT}": indexing forced OFF`);
   }
 
+  // Sample hotels are design-only content (owner's rule: never publish fake listings).
+  // Every Netlify build — the live site AND Deploy Previews — hides them, so the
+  // preview the owner approves looks exactly like what goes live. Local builds
+  // show them for design work; SHOW_SAMPLES=0 simulates the live result locally.
+  const onNetlify = process.env.NETLIFY === 'true';
+  data.site.showSamples = onNetlify ? false : process.env.SHOW_SAMPLES !== '0';
+
   const pages = await buildPages(data);
+  if (!data.site.showSamples) await assertNoSamples(data);
   const hashes = await copyAssets();
   await versionAssetUrls(hashes);
   await injectCsp(data.site);
@@ -379,6 +408,7 @@ async function main() {
     `Built ${pages.length} pages (${pages.length - stubs} real, ${stubs} planned stubs) → dist/ in ${Date.now() - started} ms`
   );
   console.log(`Indexing: ${data.site.indexing === true ? 'ON' : 'OFF (pre-launch)'} · sitemap entries: ${indexed}`);
+  console.log(`Sample listings: ${data.site.showSamples ? 'SHOWN (local design build)' : 'HIDDEN (live / preview mode)'}`);
   if (warnings.length) {
     console.warn(`\n${warnings.length} warning(s):`);
     for (const w of warnings) console.warn(`  • ${w}`);

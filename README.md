@@ -116,3 +116,4 @@ Never invent hotel names, prices, ratings, amenities, availability or reviews. S
 - [Hosting & deployment (Netlify)](docs/DEPLOYMENT.md)
 - [SEO & technical checklist](docs/SEO-CHECKLIST.md)
 - [Decisions needed](docs/DECISIONS.md)
+- [Affiliate business model](docs/AFFILIATE-PLAN.md)

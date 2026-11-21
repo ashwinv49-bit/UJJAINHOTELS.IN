@@ -36,7 +36,24 @@ export function hotelCard(site, h) {
 </article>`;
 }
 
+/**
+ * Featured section body. Sample cards appear only in local design builds
+ * (site.showSamples, set by scripts/build.mjs). On every Netlify URL, the live
+ * site and Deploy Previews, an honest "coming soon" card is shown instead.
+ */
 export default function featuredHotels({ site, data }) {
+  if (!site.showSamples) {
+    return `<div class="coming-soon featured-empty">
+  <span class="badge badge--soft">Coming soon</span>
+  <h3>Hotel listings coming soon</h3>
+  <p>We check each hotel’s details with the property before listing it. Verified hotels will appear here.</p>
+  <div class="cluster">
+    <a class="btn btn--dark" href="/list-your-hotel/">List your hotel</a>
+    <a class="btn btn--ghost" href="/#areas">Explore areas</a>
+  </div>
+</div>`;
+  }
   const cards = data.sampleHotels.map((h) => `<li>${hotelCard(site, h)}</li>`).join('');
-  return `<ul class="card-grid card-grid--rail" role="list">${cards}</ul>`;
+  return `<p class="notice section-notice" role="note">${icon('info')}<span><strong>Sample listings.</strong> These cards preview how hotels will be presented. They are not real hotels, and their details are placeholders.</span></p>
+<ul class="card-grid card-grid--rail" role="list">${cards}</ul>`;
 }
