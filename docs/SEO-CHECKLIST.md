@@ -64,7 +64,7 @@ Techniques: no frameworks; one minified CSS file and one deferred 2.7 KB script;
 | Works without JavaScript (nav, search form) | ✅ |
 | Console errors / failed requests | ✅ none |
 | Accessibility (axe-core, WCAG 2.2 A/AA) | ✅ 0 violations |
-| Google Search Console + sitemap submission | ⬜ at launch |
+| Google Search Console | 🟡 domain verification TXT record added (21 Nov 2026); sitemap submission at launch (pre-launch `robots.txt` blocks crawling) |
 | Analytics (privacy-friendly) + consent | ⬜ Decision 10 |
 
 ## Content (before launch)

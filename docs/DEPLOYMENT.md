@@ -14,6 +14,7 @@
 | Git link | ✅ GitHub `ashwinv49-bit/UJJAINHOTELS.IN` via the Netlify GitHub App. Production branch **`main`** (created 21 Nov 2026 at the reviewed commit). Work branches reach production through pull requests into `main`, and PRs get Deploy Previews |
 | Custom domain | ✅ **https://hotelsujjain.in** (primary). `www.hotelsujjain.in` → 301 → apex. DNS: Netlify DNS (zone `6b017c1e3f225b0b4994582d`); nameservers `dns1`–`dns4.p06.nsone.net`, set at GoDaddy (registrar) |
 | HTTPS | ✅ Let's Encrypt certificate for `hotelsujjain.in` + `*.hotelsujjain.in`, issued 21 Nov 2026, auto-renews (current expiry 19 Feb 2027). HSTS header served |
+| DNS TXT records | ✅ `google-site-verification=…` (Search Console, keep permanently) · SPF `v=spf1 -all` · `_dmarc`: `v=DMARC1; p=reject; adkim=s; aspf=s` (no email sent from this domain; update both before adding a mailbox) |
 | Verified on the domain | Home and inner pages 200, unknown URL 404, `www` → apex 301, security headers + `noindex` (pre-launch) served, canonical `https://hotelsujjain.in/`, no browser console errors |
 
 ### Netlify Free-plan badge

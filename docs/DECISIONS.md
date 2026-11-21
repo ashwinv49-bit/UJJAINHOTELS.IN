@@ -23,7 +23,8 @@ GitHub is linked; `main` is the production branch and every push to it deploys a
 
 ### 4. DNS for hotelsujjain.in: ✅ done
 Netlify DNS is active (nameservers switched at GoDaddy 21 Nov 2026), HTTPS certificate issued, `www` redirects to the apex.
-- **Still awaiting your approval:** email anti-spoofing records in the Netlify zone: SPF `v=spf1 -all` and DMARC `v=DMARC1; p=reject`. The domain sends no email, and GoDaddy's old DMARC record no longer applies since the switch. Change them if you later add a mailbox on this domain.
+- ✅ **Email anti-spoofing records added** (approved): SPF `v=spf1 -all` and DMARC `v=DMARC1; p=reject; adkim=s; aspf=s`. **If you later add a mailbox on this domain**, update both to your email provider's values first.
+- ✅ **Google Search Console verification TXT record added** (21 Nov 2026). Keep it permanently: Google re-checks it.
 
 ### 5. Photography
 No licensed photos are in the site yet. Commons downloads were blocked from this cloud environment.
