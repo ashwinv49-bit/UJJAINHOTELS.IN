@@ -3,7 +3,7 @@
 **HOTELS UJJAIN: Find Your Right Stay.**
 A mobile-first hotel discovery guide for Ujjain, Madhya Pradesh. It is *not* an online travel agency: no bookings, payments or inventory. Visitors discover places to stay, then contact hotels directly (WhatsApp) or go to booking partners (affiliate links). Revenue comes from affiliate commissions, labelled paid listings, direct enquiries and local advertising.
 
-> **Status: Task 01 complete (foundation + homepage prototype).** Hotel listings shown are labelled **samples**. Indexing is switched off until launch.
+> **Status: Task 01 complete (foundation + homepage prototype).** Live preview: **https://hotels-ujjain.netlify.app**. Hotel listings shown are labelled **samples**; indexing is switched off until launch.
 
 ---
 
@@ -61,7 +61,7 @@ node scripts/qa-browser.cjs    # Playwright: layouts, console errors, nav, searc
 
 ## Hosting: Netlify
 
-`netlify.toml` tells Netlify to run `node scripts/build.mjs --strict` and publish `dist/` (Node 22). Headers come from `dist/_headers`. Non-production Netlify builds (Deploy Previews, branch deploys) are always `noindex`. Setup and domain steps: [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
+`netlify.toml` tells Netlify to run `node scripts/build.mjs --strict` and publish `dist/` (Node 22). Headers come from `dist/_headers`. Non-production Netlify builds (Deploy Previews, branch deploys) are always `noindex`. Until GitHub is linked to the Netlify project, deploy manually with `scripts/deploy-netlify.py`. Setup, domain steps and the Free-plan badge note: [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
 
 ## How the build works
 
@@ -96,6 +96,7 @@ ogImage: /assets/images/og/budget.jpg   # optional
 | `prototype` | `true` (shows the preview bar) | `false` |
 | `indexing` | `false` (`noindex` + `Disallow: /`) | `true` |
 | `contact.whatsapp` | empty (buttons go to /contact/) | `91XXXXXXXXXX` |
+| `hosting.netlifyFreePlanBadge` | `true` (Netlify Free plan) | `false` on a plan that hides the badge → strict CSP |
 
 ## Adding photos
 

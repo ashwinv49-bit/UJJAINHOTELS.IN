@@ -1,16 +1,33 @@
 # Hosting and deployment: Netlify
 
-> **Hosting decision: Netlify** (your separate Netlify account).
-> **Nothing has been applied yet.** No Netlify project, DNS or domain changes have been made. Steps marked 🔒 need your approval or your own login.
+> **Hosting decision: Netlify** (your separate Netlify account, Free plan).
+> Steps marked 🔒 need your approval or your own login. No DNS or domain changes have been made.
 
----
+## Current status (21 Nov 2026)
+
+| | |
+|---|---|
+| Live prototype | **https://hotels-ujjain.netlify.app** (noindex; prototype bar shown) |
+| Netlify project | `hotels-ujjain` (site ID `cac53e78-de6b-4f83-b28f-50d840bd97d4`), created by you today and empty until this deploy |
+| How it was deployed | Manual API deploy of `dist/` with `scripts/deploy-netlify.py`, using a personal access token saved as a network secret on this cloud environment |
+| Verified live | All pages 200, unknown URLs 404, `/about` → `/about/` 301, CSP/HSTS/security headers served, assets cached for 1 year, no console errors at 390 px and 1440 px |
+| ⚠ Git link | The project is linked to a **Netlify-hosted Git repo** (`hotels-ujjain.git`, branch `main`), not to GitHub. A push to that repo would replace the manual deploy. Re-link it to GitHub (§2). |
+| Custom domain | Not yet connected (§3) |
+
+### Netlify Free-plan badge
+On the Free plan, Netlify injects a **"Powered by Netlify"** badge (bottom-right) on published sites, and it cannot be hidden on that plan. Because the badge renders with inline script and style, `data/site.json → hosting.netlifyFreePlanBadge: true` makes the build:
+- allow `'unsafe-inline'` for scripts and styles in the CSP (everything else stays locked to same-origin), and
+- add space under the footer so the badge never covers it.
+
+On a paid plan that lets you hide the badge, set `netlifyFreePlanBadge` to `false`. The build then switches back to the strict policy (hash-allowlisted inline script, no inline styles).
 
 ## 1. What is already configured in the repo
 
 | File | Purpose |
 |---|---|
 | `netlify.toml` | Build command `node scripts/build.mjs --strict`, publish folder `dist`, Node 22 |
-| `src/static/_headers` → `dist/_headers` | Security headers (CSP with inline-script hashes injected at build, HSTS, nosniff, frame/referrer/permissions policies) and one-year caching for `/assets/*` |
+| `src/static/_headers` → `dist/_headers` | Security headers (CSP filled in at build time: see the badge note above; HSTS, nosniff, frame/referrer/permissions policies) and one-year caching for `/assets/*` |
+| `scripts/deploy-netlify.py` | Manual API deploy of `dist/` (until GitHub is linked): `NETLIFY_AUTH_TOKEN=… python3 scripts/deploy-netlify.py <site-id> [--draft]` |
 | `dist/404.html` | Served by Netlify for unknown URLs |
 | `scripts/build.mjs` | **Netlify safety rail:** any non-production build (Deploy Preview, branch deploy) is forced to `noindex`, even after launch, because Netlify's branch deploys are publicly crawlable |
 | `.gitignore` | Ignores `.netlify/` (Netlify CLI link state) |
@@ -21,22 +38,17 @@ The site needs no Netlify Functions, plugins or environment secrets. Builds take
 
 ---
 
-## 2. Connect the repository (recommended: Git continuous deployment)
+## 2. Link the GitHub repository (continuous deployment) 🔒
 
-No tokens need to be shared. Netlify builds on every push and gives each pull request a preview URL.
+Do this once in the Netlify UI (it needs your GitHub authorisation). Every push then builds and deploys automatically, and pull requests get preview URLs.
 
-1. 🔒 Log in to the Netlify account you want to host with.
-2. **Add new project → Import an existing project → GitHub.** Authorise the Netlify GitHub App for `ashwinv49-bit/UJJAINHOTELS.IN`. (Netlify sometimes renames these menus.)
-3. Netlify reads `netlify.toml`, so leave the build command and publish directory as they are.
-4. **Branch to deploy:** GitHub currently treats `ccr-db98cbba-h9x0d2` (this prototype branch) as the repository's default, because it was the first branch pushed. There is no `main` yet. Either:
-   - **Recommended:** create `main` from the reviewed work first (I can open a pull request), set `main` as GitHub's default branch, then choose `main` as Netlify's production branch; or
-   - deploy the prototype branch now as production, and switch the production branch to `main` later (*Project configuration → Build & deploy → Branches and deploy contexts*).
-5. Deploy. You get `https://<project-name>.netlify.app`. Rename the project (e.g. `hotelsujjain`) under *Project configuration → General → Project details*.
-6. Optional: enable **branch deploys** for prototype branches (off by default) so each branch gets `https://<branch>--<project>.netlify.app`.
+1. Netlify → project **hotels-ujjain** → *Project configuration → Build & deploy → Continuous deployment → Repository → Manage repository → Link to a different repository* (menu names change occasionally).
+2. Choose **GitHub**, authorise the Netlify GitHub App for `ashwinv49-bit/UJJAINHOTELS.IN`, and select it.
+3. Leave the build command and publish directory empty: `netlify.toml` provides them.
+4. **Production branch:** there is no `main` yet; GitHub treats `ccr-db98cbba-h9x0d2` (this prototype branch) as the default. **Recommended:** create `main` through a pull request first, make it GitHub's default branch, and set it as Netlify's production branch. Otherwise use the prototype branch for now and switch later.
+5. Optional: enable **branch deploys** (off by default) for `https://<branch>--hotels-ujjain.netlify.app` previews. These are always `noindex` thanks to the build's safety rail.
 
-**Alternative (manual CLI deploy).** Run `npm run build`, then `npx netlify-cli deploy --dir=dist`. This needs your Netlify login or a personal access token, and a manual `--prod` deploy is replaced by the next Git push if the repo is also connected.
-
----
+Until this is done, deploy manually with `scripts/deploy-netlify.py`.
 
 ## 3. Custom domain: hotelsujjain.in 🔒
 
@@ -54,7 +66,7 @@ In Netlify: *Domain management → Add a domain → `hotelsujjain.in`* and make 
 1. At GoDaddy DNS:
    - **Delete both parking A records** (`3.33.130.190` and `15.197.148.33`). If either remains, the site loads only some of the time.
    - Add **A `@` → the load-balancer IP shown in Netlify's domain instructions** (documented as `75.2.60.5` at the time of writing; use whatever Netlify shows).
-   - Change **CNAME `www` → `<project-name>.netlify.app`**.
+   - Change **CNAME `www` → `hotels-ujjain.netlify.app`**.
    - Turn off any GoDaddy *Forwarding* for the domain.
 2. Netlify → *Domain management → HTTPS → Verify DNS configuration*. The certificate is issued automatically.
 
@@ -105,6 +117,7 @@ See `DECISIONS.md`, decision 1. If you retire the WordPress site and redirect it
 - [ ] Photos added with credits; `altVerified` set for each
 - [ ] `data/site.json → "prototype": false` and `"indexing": true`
 - [ ] `npm run qa` and browser QA pass
+- [ ] GitHub linked for continuous deployment; production branch set
 - [ ] Netlify production deploy is live; HTTPS works on apex and www; www → apex 301
 - [ ] Google Search Console: domain verified; `https://hotelsujjain.in/sitemap.xml` submitted
 - [ ] Analytics/consent decision implemented (cookie-free options include Cloudflare Web Analytics or Netlify's own analytics add-on)

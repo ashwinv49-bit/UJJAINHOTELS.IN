@@ -202,6 +202,8 @@ async function buildPages(data) {
     page.excludeFromSitemap = page.noindex === true || page.path === '/404.html';
     page.noindex = page.excludeFromSitemap || site.indexing !== true;
     page.bodyClass = page.bodyClass || (page.stub ? 'page page--stub' : 'page');
+    // Netlify's free-plan badge is fixed bottom-right: leave room so it never covers the footer
+    if (site.hosting?.netlifyFreePlanBadge) page.bodyClass += ' has-host-badge';
     page.canonical = site.url.replace(/\/$/, '') + page.path;
     page.robots = page.noindex ? 'noindex, nofollow' : 'index, follow';
     page.ogImage = site.url.replace(/\/$/, '') + (page.ogImage || site.defaultOgImage);
@@ -295,20 +297,38 @@ async function versionAssetUrls(hashes) {
   }
 }
 
-/** Put sha256 hashes of inline <script>s into the CSP in dist/_headers. */
-async function injectCspHashes() {
+/**
+ * Fill the CSP placeholders in dist/_headers.
+ * Strict mode: sha256 hashes of our inline <script>s, no inline styles.
+ * Netlify free plan: Netlify injects its required "Hosted on Netlify" badge,
+ * which renders with inline script/style (content varies by viewport and by
+ * Netlify release, so hashes would break silently) → allow 'unsafe-inline'.
+ * Hashes must be omitted in that mode: browsers ignore 'unsafe-inline' when a hash is present.
+ */
+async function injectCsp(site) {
   const headersFile = path.join(DIST, '_headers');
   if (!existsSync(headersFile)) return;
-  const hashes = new Set();
-  for (const file of await walk(DIST)) {
-    if (!file.endsWith('.html')) continue;
-    const html = await readFile(file, 'utf8');
-    for (const m of html.matchAll(/<script(?![^>]*\bsrc=)(?![^>]*application\/ld\+json)[^>]*>([\s\S]*?)<\/script>/g)) {
-      hashes.add(`'sha256-${createHash('sha256').update(m[1]).digest('base64')}'`);
+  let scriptSrc;
+  let styleSrc = '';
+  if (site.hosting?.netlifyFreePlanBadge) {
+    scriptSrc = "'unsafe-inline'";
+    styleSrc = " 'unsafe-inline'";
+  } else {
+    const hashes = new Set();
+    for (const file of await walk(DIST)) {
+      if (!file.endsWith('.html')) continue;
+      const html = await readFile(file, 'utf8');
+      for (const m of html.matchAll(/<script(?![^>]*\bsrc=)(?![^>]*application\/ld\+json)[^>]*>([\s\S]*?)<\/script>/g)) {
+        hashes.add(`'sha256-${createHash('sha256').update(m[1]).digest('base64')}'`);
+      }
     }
+    scriptSrc = [...hashes].join(' ');
   }
   const headers = await readFile(headersFile, 'utf8');
-  await writeFile(headersFile, headers.replace('{{INLINE_SCRIPT_HASHES}}', [...hashes].join(' ')));
+  await writeFile(
+    headersFile,
+    headers.replace('{{INLINE_SCRIPT_HASHES}}', scriptSrc).replace('{{STYLE_SRC_EXTRA}}', styleSrc)
+  );
 }
 
 // ---------------------------------------------------------------- sitemap & robots
@@ -351,7 +371,7 @@ async function main() {
   const pages = await buildPages(data);
   const hashes = await copyAssets();
   await versionAssetUrls(hashes);
-  await injectCspHashes();
+  await injectCsp(data.site);
   const indexed = await writeSeoFiles(data.site, pages);
 
   const stubs = pages.filter((p) => p.stub).length;

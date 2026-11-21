@@ -59,7 +59,7 @@ Techniques: no frameworks; one minified CSS file and one deferred 2.7 KB script;
 | HTTPS + HSTS | 🟡 HSTS in `_headers`; Netlify issues the Let's Encrypt certificate when the domain is attached |
 | www → apex 301 | 🟡 automatic on Netlify once `hotelsujjain.in` is the primary domain |
 | Previews never indexed | ✅ Netlify adds `noindex` to Deploy Previews; our build also forces `noindex` on branch deploys |
-| Security headers (CSP, nosniff, referrer, permissions, frame) | ✅ in `_headers` (Netlify); CSP hashes inline scripts automatically; verified in Chromium: own script allowed, injected scripts blocked, no console errors |
+| Security headers (CSP, nosniff, referrer, permissions, frame) | ✅ live on Netlify. CSP is same-origin only; on the Free plan it allows inline script/style for Netlify's required badge (strict hash mode available, see DEPLOYMENT.md). No console errors on the live site |
 | Mobile-friendly at 360 / 768 / 1440 px, no horizontal scroll | ✅ Playwright QA |
 | Works without JavaScript (nav, search form) | ✅ |
 | Console errors / failed requests | ✅ none |

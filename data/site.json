@@ -14,5 +14,9 @@
     "whatsapp": "",
     "email": "",
     "enquiryMessage": "Namaste! I found HotelsUjjain.in and would like help finding a stay in Ujjain."
+  },
+  "hosting": {
+    "provider": "netlify",
+    "netlifyFreePlanBadge": true
   }
 }
