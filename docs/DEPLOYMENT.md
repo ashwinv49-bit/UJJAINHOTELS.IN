@@ -1,7 +1,7 @@
 # Hosting and deployment: Netlify
 
 > **Hosting decision: Netlify** (your separate Netlify account, Free plan).
-> Steps marked 🔒 need your approval or your own login. No DNS or domain changes have been made.
+> Steps marked 🔒 need your approval or your own login. Netlify-side domain setup is done; the GoDaddy nameserver change has not been made.
 
 ## Current status (21 Nov 2026)
 
@@ -12,7 +12,9 @@
 | How it was deployed | Manual API deploy of `dist/` with `scripts/deploy-netlify.py`, using a personal access token saved as a network secret on this cloud environment |
 | Verified live | All pages 200, unknown URLs 404, `/about` → `/about/` 301, CSP/HSTS/security headers served, assets cached for 1 year, no console errors at 390 px and 1440 px |
 | ⚠ Git link | The project is linked to a **Netlify-hosted Git repo** (`hotels-ujjain.git`, branch `main`), not to GitHub. A push to that repo would replace the manual deploy. Re-link it to GitHub (§2). |
-| Custom domain | Not yet connected (§3) |
+| Custom domain | `hotelsujjain.in` (primary) + `www.hotelsujjain.in` (alias) attached to the project. **Netlify DNS zone created** (zone ID `6b017c1e3f225b0b4994582d`) with records for apex and www → the site. **Waiting for the nameserver change at GoDaddy** (§3) |
+| New nameservers | `dns1.p06.nsone.net` · `dns2.p06.nsone.net` · `dns3.p06.nsone.net` · `dns4.p06.nsone.net` |
+| DNSSEC | Off at GoDaddy (checked), so the switch is safe |
 
 ### Netlify Free-plan badge
 On the Free plan, Netlify injects a **"Powered by Netlify"** badge (bottom-right) on published sites, and it cannot be hidden on that plan. Because the badge renders with inline script and style, `data/site.json → hosting.netlifyFreePlanBadge: true` makes the build:
