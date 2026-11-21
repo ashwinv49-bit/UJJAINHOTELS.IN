@@ -116,7 +116,10 @@ for (const file of htmlFiles) {
       err('invalid JSON-LD');
     }
   }
-  if (/target="_blank"/.test(html) && /target="_blank"(?![^>]*rel="[^"]*noopener)/.test(html)) err('target=_blank without rel=noopener');
+  // Every link that opens a new tab must carry rel="…noopener…" (attribute order doesn't matter)
+  for (const m of html.matchAll(/<a\b[^>]*\btarget="_blank"[^>]*>/g)) {
+    if (!/\brel="[^"]*\bnoopener\b[^"]*"/.test(m[0])) err(`target=_blank without rel=noopener: ${m[0].slice(0, 90)}`);
+  }
 }
 
 for (const [from, page, id] of pendingAnchors) {

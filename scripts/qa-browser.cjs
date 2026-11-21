@@ -23,7 +23,9 @@ const VIEWPORTS = [
   { name: 'tablet', width: 768, height: 1024 },
   { name: 'desktop', width: 1440, height: 900 },
 ];
-const PAGES = ['/', '/hotels/near-mahakal-temple/', '/affiliate-disclosure/', '/photo-credits/', '/404.html'];
+const PAGES = ['/', '/hotels/', '/hotels/near-mahakal-temple/', '/hotels/nanakheda/', '/affiliate-disclosure/', '/photo-credits/', '/404.html'];
+// Placeholder profile exists only in local design builds; checked when present.
+const OPTIONAL_PAGES = ['/hotels/placeholder-hotel-a/'];
 
 const failures = [];
 const fail = (m) => failures.push(m);
@@ -46,7 +48,8 @@ const pass = (m) => console.log(`  ✓ ${m}`);
       page.on('requestfailed', (r) => problems.push(`requestfailed: ${r.url()}`));
       page.on('response', (r) => r.status() >= 400 && !r.url().includes('404') && problems.push(`HTTP ${r.status()}: ${r.url()}`));
 
-      for (const p of PAGES) {
+      const pagesToCheck = [...PAGES, ...OPTIONAL_PAGES.filter((p) => existsSync(path.join(ROOT, 'dist', p, 'index.html')))];
+      for (const p of pagesToCheck) {
         await page.goto(BASE + p, { waitUntil: 'networkidle' });
         const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
         if (overflow > 0) fail(`${vp.name} ${p}: horizontal overflow of ${overflow}px`);
@@ -119,21 +122,75 @@ const pass = (m) => console.log(`  ✓ ${m}`);
       const status = await page.evaluate(() => document.title);
       if (/not found/i.test(status)) fail(`search destination ${expected} is a 404`);
     }
-    // Echo on stub page
-    const echo = await page.goto(BASE + '/hotels/near-ram-ghat/?type=budget').then(() => page.locator('[data-search-echo]').textContent());
-    if (!/Budget stays/.test(echo || '')) fail('stub page did not acknowledge the search');
-    else pass('stub page acknowledges the search without claiming results');
+    // ---- Hotel directory, filters and profile buttons
+    console.log('\n[hotels]');
+    await page.goto(BASE + '/hotels/', { waitUntil: 'networkidle' });
+    const totalCards = await page.locator('[data-hotel-list] > li').count();
+    const visible = () => page.locator('[data-hotel-list] > li:not([hidden])').count();
+    if (totalCards >= 3) {
+      // Local design build: placeholders A (mahakal, budget, family), B (station, mid, lift), C (dewas road, premium, family)
+      const checks = [
+        [async () => page.selectOption('#f-location', 'dewas-road'), 1, 'location filter'],
+        [async () => { await page.selectOption('#f-location', ''); await page.selectOption('#f-budget', 'premium'); }, 1, 'budget filter'],
+        [async () => { await page.selectOption('#f-budget', ''); await page.check('input[name="facility"][value="lift"]'); }, 1, 'facility filter'],
+        [async () => page.selectOption('#f-location', 'near-mahakal-temple'), 0, 'combined filters (no match)'],
+      ];
+      for (const [act, want, label] of checks) {
+        await act();
+        const n = await visible();
+        if (n !== want) fail(`${label}: ${n} visible, expected ${want}`);
+        else pass(`${label} → ${want} hotel(s) shown`);
+      }
+      if (!(await page.locator('[data-no-results]').isVisible())) fail('no-results message not shown');
+      else pass('"No hotels match" message shown when nothing matches');
+      if (!page.url().includes('location=near-mahakal-temple') || !page.url().includes('facility=lift')) fail(`filters not kept in URL: ${page.url()}`);
+      else pass('filter state is kept in the URL');
+      await page.click('[data-clear-filters]');
+      await page.waitForTimeout(50);
+      if ((await visible()) !== totalCards) fail('clear filters did not restore all hotels');
+      else pass('"Clear filters" restores all hotels');
+      if (!/3 verified hotels/.test(await page.locator('[data-results-count]').textContent())) fail('result count wrong after reset');
+      // URL presets, incl. the homepage search's ?type=
+      for (const [qs, want] of [['?type=premium', 1], ['?facility=wifi,parking', 2], ['?type=family', 2], ['?location=near-railway-station', 1]]) {
+        await page.goto(BASE + '/hotels/' + qs, { waitUntil: 'networkidle' });
+        const n = await visible();
+        if (n !== want) fail(`/hotels/${qs}: ${n} visible, expected ${want}`);
+        else pass(`/hotels/${qs} pre-applies filters → ${want}`);
+      }
+      // Profile buttons
+      await page.goto(BASE + '/hotels/placeholder-hotel-a/', { waitUntil: 'networkidle' });
+      const hrefs = await page.$$eval('.hotel-actions a', (as) => as.map((a) => a.getAttribute('href')));
+      const ok = hrefs.some((h) => /^tel:\+91\d{10}$/.test(h)) && hrefs.some((h) => h.startsWith('https://wa.me/91')) && hrefs.some((h) => h.startsWith('https://www.google.com/maps/dir/?api=1&destination='));
+      if (!ok) fail(`profile action links wrong: ${hrefs.join(' | ')}`);
+      else pass('profile has valid Call (tel:), WhatsApp (wa.me) and Directions (Google Maps) links');
+      if (await page.locator('text=Check prices on').count()) fail('affiliate button shown for a disabled partner');
+      else pass('affiliate button hidden when the partner is not enabled');
+      if (!(await page.locator('.placeholder-banner').isVisible())) fail('placeholder banner missing on placeholder profile');
+      else pass('placeholder profile shows the PLACEHOLDER banner');
+    } else {
+      // Live/preview mode: no verified hotels yet
+      if (!(await page.locator('text=No verified hotels here yet').count())) fail('/hotels/ empty state missing');
+      else pass('/hotels/ shows the empty state (no verified hotels yet)');
+      if ((await page.locator('[data-placeholder]').count()) > 0) fail('placeholder content on a live-mode build');
+      else pass('no placeholder content in live mode');
+    }
 
-    // No-JS fallback: form still submits as GET
+    // No-JS fallback: search still submits as GET; directory lists every hotel without the filter form
     const nojs = await browser.newContext({ javaScriptEnabled: false });
     const np = await nojs.newPage();
     await np.goto(BASE + '/');
-    await np.selectOption('#search-type', 'luxury');
+    await np.selectOption('#search-type', 'premium');
     await Promise.all([np.waitForURL('**/hotels/**'), np.click('.search-form__submit')]);
-    if (!np.url().includes('/hotels/?area=&type=luxury')) fail(`no-JS search went to ${np.url()}`);
+    if (!np.url().includes('/hotels/?area=&type=premium')) fail(`no-JS search went to ${np.url()}`);
     else pass('without JavaScript the search form still works (GET /hotels/?type=…)');
     if (!(await np.locator('#site-nav').isVisible())) fail('no-JS: navigation hidden');
     else pass('without JavaScript the navigation stays visible');
+    if (totalCards >= 3) {
+      const shown = await np.locator('[data-hotel-list] > li').count();
+      const formShown = await np.locator('[data-hotel-filters]').isVisible();
+      if (shown !== totalCards || formShown) fail(`no-JS directory: ${shown} cards, filter form visible=${formShown}`);
+      else pass('without JavaScript all hotels are listed and the filter form stays hidden');
+    }
     await nojs.close();
 
     // Keyboard: skip link + visible focus

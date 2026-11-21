@@ -153,6 +153,12 @@ textarea {
   stroke: none;
 }
 
+/* The hidden attribute must always win over component display rules
+   (filtered-out hotel cards, the menu button before JS runs, etc.) */
+[hidden] {
+  display: none !important;
+}
+
 .visually-hidden {
   position: absolute !important;
   width: 1px;

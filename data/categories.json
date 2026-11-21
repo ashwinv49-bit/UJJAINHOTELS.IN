@@ -5,9 +5,10 @@
     "short": "Near Mahakal",
     "summary": "Stay close to darshan and the Mahakal Lok corridor, so early visits are easy.",
     "pageTitle": "Hotels near Mahakal Temple, Ujjain",
-    "description": "Find hotels near Mahakaleshwar Temple in Ujjain. Listings for stays close to darshan and the Mahakal Lok corridor are coming soon.",
+    "description": "Hotels near Mahakaleshwar Temple in Ujjain, listed only after their details are checked with the property. Call or WhatsApp hotels directly.",
     "icon": "temple",
-    "url": "/hotels/near-mahakal-temple/"
+    "url": "/hotels/near-mahakal-temple/",
+    "match": { "area": "near-mahakal-temple" }
   },
   {
     "slug": "budget",
@@ -15,9 +16,10 @@
     "short": "Budget",
     "summary": "Simple, affordable rooms for pilgrims, students and short stays.",
     "pageTitle": "Budget Hotels in Ujjain",
-    "description": "Find budget hotels and affordable rooms in Ujjain for pilgrims and short stays. Listings are coming soon on HotelsUjjain.in.",
+    "description": "Budget hotels in Ujjain for pilgrims and short stays, listed only after their details are checked with the property. Contact hotels directly.",
     "icon": "wallet",
-    "url": "/hotels/budget/"
+    "url": "/hotels/budget/",
+    "match": { "priceBand": "budget" }
   },
   {
     "slug": "family",
@@ -25,28 +27,31 @@
     "short": "Family",
     "summary": "Stays that suit families travelling with children and elders.",
     "pageTitle": "Family Hotels in Ujjain",
-    "description": "Find family-friendly hotels in Ujjain for trips with children and elders. Listings are coming soon on HotelsUjjain.in.",
+    "description": "Family-friendly hotels in Ujjain for trips with children and elders, listed only after their details are checked with the property.",
     "icon": "family",
-    "url": "/hotels/family/"
+    "url": "/hotels/family/",
+    "match": { "suitableFor": "family" }
   },
   {
-    "slug": "luxury",
-    "title": "Luxury Hotels",
-    "short": "Luxury",
+    "slug": "premium",
+    "title": "Premium Hotels",
+    "short": "Premium",
     "summary": "Premium hotels and resorts for a more comfortable, unhurried visit.",
-    "pageTitle": "Luxury Hotels and Resorts in Ujjain",
-    "description": "Find luxury hotels and resorts in Ujjain for a comfortable, unhurried visit. Listings are coming soon on HotelsUjjain.in.",
+    "pageTitle": "Premium Hotels and Resorts in Ujjain",
+    "description": "Premium hotels and resorts in Ujjain for a comfortable, unhurried visit, listed only after their details are checked with the property.",
     "icon": "sparkle",
-    "url": "/hotels/luxury/"
+    "url": "/hotels/premium/",
+    "match": { "priceBand": "premium" }
   },
   {
     "slug": "near-railway-station",
-    "title": "Hotels near Railway Station",
+    "title": "Hotels near Ujjain Railway Station",
     "short": "Near Railway Station",
     "summary": "Practical stays close to Ujjain Junction for early trains and late arrivals.",
     "pageTitle": "Hotels near Ujjain Railway Station",
-    "description": "Find hotels near Ujjain Junction railway station for early trains and late arrivals. Listings are coming soon on HotelsUjjain.in.",
+    "description": "Hotels near Ujjain Junction railway station for early trains and late arrivals, listed only after their details are checked with the property.",
     "icon": "train",
-    "url": "/hotels/near-railway-station/"
+    "url": "/hotels/near-railway-station/",
+    "match": { "area": "near-railway-station" }
   }
 ]

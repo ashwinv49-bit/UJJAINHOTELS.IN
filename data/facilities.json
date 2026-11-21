@@ -1,0 +1,14 @@
+[
+  { "slug": "ac", "label": "AC rooms", "schema": "Air conditioning" },
+  { "slug": "parking", "label": "Parking", "schema": "Parking" },
+  { "slug": "wifi", "label": "Wi-Fi", "schema": "Wi-Fi" },
+  { "slug": "lift", "label": "Lift", "schema": "Elevator" },
+  { "slug": "family-rooms", "label": "Family rooms", "schema": "Family rooms" },
+  { "slug": "pure-veg", "label": "Pure-veg food", "schema": "Vegetarian food" },
+  { "slug": "restaurant", "label": "Restaurant", "schema": "Restaurant" },
+  { "slug": "room-service", "label": "Room service", "schema": "Room service" },
+  { "slug": "24h-desk", "label": "24-hour front desk", "schema": "24-hour front desk" },
+  { "slug": "hot-water", "label": "Hot water", "schema": "Hot water" },
+  { "slug": "power-backup", "label": "Power backup", "schema": "Power backup" },
+  { "slug": "wheelchair", "label": "Wheelchair access", "schema": "Wheelchair accessible" }
+]

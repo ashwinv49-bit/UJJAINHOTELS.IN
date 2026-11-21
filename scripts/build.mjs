@@ -25,6 +25,7 @@ import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import * as H from './lib/hotels.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SRC = path.join(ROOT, 'src');
@@ -137,10 +138,149 @@ async function loadData() {
     if (!file.endsWith('.json')) continue;
     const rel = path.relative(DATA, file);
     if (rel.startsWith('schema')) continue; // JSON Schemas are documentation, not content
+    if (rel.startsWith('hotels')) continue; // hotel records load separately (loadHotels) — never as flat keys
     const key = camel(path.basename(file, '.json'));
     data[key] = JSON.parse(await readFile(file, 'utf8'));
   }
   return data;
+}
+
+// ---------------------------------------------------------------- hotels
+const HOTELS_DIR = path.join(DATA, 'hotels');
+const PLACEHOLDER_DIR = path.join(DATA, 'hotels-placeholder');
+const notices = [];
+
+/** Read every hotel record (real + placeholder) with its source file. */
+async function loadHotels() {
+  const out = [];
+  for (const [dir, inPlaceholderDir] of [[HOTELS_DIR, false], [PLACEHOLDER_DIR, true]]) {
+    for (const file of await walk(dir)) {
+      if (!file.endsWith('.json')) continue;
+      const source = path.relative(ROOT, file);
+      let record;
+      try {
+        record = JSON.parse(await readFile(file, 'utf8'));
+      } catch (e) {
+        throw new Error(`${source}: invalid JSON — ${e.message}`);
+      }
+      out.push({ record, source, inPlaceholderDir });
+    }
+  }
+  return out;
+}
+
+/**
+ * Validate all records and decide what is public. Only verified, valid
+ * records are published; placeholders only in local design builds.
+ * Problems with VERIFIED records are build warnings (fatal with --strict);
+ * draft/contacted records are reported by `npm run hotels`, not here.
+ */
+function prepareHotels(data, loaded) {
+  const site = data.site;
+  const today = H.todayIST();
+  const ctx = {
+    areas: new Set((data.areas ?? []).map((a) => a.slug)),
+    facilities: new Set((data.facilities ?? []).map((f) => f.slug)),
+    reservedSlugs: new Set([...(data.categories ?? []).map((c) => c.slug), ...(data.areas ?? []).map((a) => a.slug), 'sample-listing']),
+    affiliates: data.affiliates,
+    today,
+  };
+  const seen = new Map();
+  const results = loaded.map(({ record, source, inPlaceholderDir }) => {
+    const { errors, warnings, notices: recNotices } = H.validateHotel(record, ctx);
+    if (inPlaceholderDir && record.placeholder !== true) errors.push('records in data/hotels-placeholder/ must have "placeholder": true');
+    if (!inPlaceholderDir && record.placeholder === true) errors.push('placeholder records belong in data/hotels-placeholder/, not data/hotels/');
+    if (seen.has(record.slug)) errors.push(`duplicate slug "${record.slug}" (also in ${seen.get(record.slug)})`);
+    seen.set(record.slug, source);
+    const isPublic = H.isPublic(record, { showSamples: site.showSamples, errors });
+    const relevant = !record.placeholder || site.showSamples; // placeholders don't matter on Netlify builds
+    if (relevant && record.status === 'verified') {
+      for (const e of errors) warn(`${source}: NOT PUBLISHED — ${e}`);
+      for (const w of warnings) warn(`${source}: ${w}`);
+      for (const n of recNotices) notices.push(`${source}: ${n}`);
+    }
+    return { record, source, errors, isPublic };
+  });
+
+  data.hotelRecords = results;
+  data.publicHotels = results
+    .filter((r) => r.isPublic)
+    .map((r) => H.toViewModel(r.record, { site, data, affiliates: data.affiliates, today }))
+    .sort((a, b) => Number(b.featured) - Number(a.featured) || a.name.localeCompare(b.name));
+  data.featuredHotels = data.publicHotels.filter((h) => h.featured);
+}
+
+const BRAND = ' | HotelsUjjain.in';
+const withBrand = (title) => (title.length + BRAND.length <= 60 ? title + BRAND : title);
+
+function metaDescription(text, fallback) {
+  let d = (text || '').trim();
+  if (d.length > 155) d = `${d.slice(0, 152).replace(/\s+\S*$/, '')}…`;
+  if (d.length < 50) d = `${d} ${fallback}`.trim();
+  return d;
+}
+
+/** Profile + collection pages generated from the hotel data. */
+function hotelPages(data) {
+  const site = data.site;
+  const pages = [];
+
+  for (const h of data.publicHotels) {
+    const crumbs = [
+      { name: 'Home', path: '/' },
+      { name: 'Hotels', path: '/hotels/' },
+      ...(h.areaUrl ? [{ name: h.areaTitle, path: h.areaUrl }] : []),
+      { name: h.name, path: h.url },
+    ];
+    let title = `${h.name}, ${h.areaTitle}, Ujjain${BRAND}`;
+    if (title.length > 60) title = `${h.name}, Ujjain${BRAND}`;
+    if (title.length > 60) title = `${h.name}${BRAND}`;
+    pages.push({
+      path: h.url,
+      title,
+      description: metaDescription(h.summary, `${h.propertyTypeLabel || 'Stay'} in ${h.areaTitle}, Ujjain. Call or WhatsApp the hotel directly.`),
+      hotel: h,
+      crumbs,
+      noindex: h.placeholder,
+      ogImage: h.photos[0]?.src,
+      lastmod: h.lastVerified,
+      bodyClass: 'page page--hotel',
+      structuredData: H.jsonLdScript(H.hotelJsonLd(h, site)) + H.jsonLdScript(H.breadcrumbJsonLd(crumbs, site)),
+      source: `hotel profile (${h.slug})`,
+      body: '{{> hotel-profile }}',
+    });
+  }
+
+  const all = (data.plannedPages ?? []).find((p) => p.collection === 'all');
+  const collections = [
+    ...(all ? [{ ...all, url: all.path, rule: {}, kind: 'all' }] : []),
+    ...(data.categories ?? []).map((c) => ({ ...c, rule: c.match, kind: 'category' })),
+    ...(data.areas ?? []).map((a) => ({ ...a, rule: { area: a.slug }, kind: 'area' })),
+  ];
+  const done = new Set();
+  for (const c of collections) {
+    if (!c.url || done.has(c.url)) continue; // categories win over areas with the same URL
+    done.add(c.url);
+    const hotels = data.publicHotels.filter((h) => H.matchesRule(h, c.rule));
+    const heading = c.heading ?? c.title;
+    const crumbs = [{ name: 'Home', path: '/' }, ...(c.kind === 'all' ? [] : [{ name: 'Hotels', path: '/hotels/' }]), { name: heading, path: c.url }];
+    const realCount = hotels.filter((h) => !h.placeholder).length;
+    pages.push({
+      path: c.url,
+      title: withBrand(c.pageTitle ?? c.title),
+      description: c.description ?? c.summary,
+      collection: { ...c, heading, intro: c.intro ?? c.summary, hotels },
+      crumbs,
+      // Empty (or placeholder-only) collections are thin content: keep them out of search.
+      noindex: realCount === 0,
+      lastmod: hotels.map((h) => h.lastVerified).filter(Boolean).sort().at(-1) ?? null,
+      bodyClass: 'page page--collection',
+      structuredData: H.jsonLdScript(H.breadcrumbJsonLd(crumbs, site)),
+      source: `collection (${c.url})`,
+      body: '{{> hotel-directory }}',
+    });
+  }
+  return pages;
 }
 
 // ---------------------------------------------------------------- pages
@@ -177,7 +317,7 @@ function plannedPages(data) {
     .filter((p) => !(p.previewOnly && !data.site.showSamples));
 }
 
-async function buildPages(data) {
+async function buildPages(data, generatedPages = []) {
   const site = data.site;
   const layout = await readFile(path.join(SRC, 'layouts', 'base.html'), 'utf8');
   const stubTpl = await readFile(path.join(SRC, 'layouts', 'stub.html'), 'utf8');
@@ -188,6 +328,11 @@ async function buildPages(data) {
     const rel = path.relative(path.join(SRC, 'pages'), file);
     const { meta, body } = parseFrontMatter(await readFile(file, 'utf8'));
     pages.push({ ...meta, path: urlPathFor(rel), source: path.relative(ROOT, file), body, lastmod: gitDate(file) });
+  }
+  // Hotel profiles and collections replace any "coming soon" stub at the same URL
+  for (const g of generatedPages) {
+    if (pages.some((p) => p.path === g.path)) throw new Error(`Generated page ${g.path} clashes with src/pages`);
+    pages.push(g);
   }
 
   const realPaths = new Set(pages.map((p) => p.path));
@@ -217,7 +362,7 @@ async function buildPages(data) {
     if (page.title && page.title.length > 65) warn(`${page.source}: title is ${page.title.length} chars (aim ≤ 60)`);
     if (page.description && page.description.length > 165)
       warn(`${page.source}: description is ${page.description.length} chars (aim ≤ 160)`);
-    if (!page.stub) {
+    if (!page.stub && !page.excludeFromSitemap) {
       if (titles.has(page.title)) warn(`Duplicate title "${page.title}" (${titles.get(page.title)}, ${page.source})`);
       if (descriptions.has(page.description)) warn(`Duplicate description on ${page.source}`);
       titles.set(page.title, page.source);
@@ -361,16 +506,42 @@ async function writeSeoFiles(site, pages) {
  * hotels can't go live by accident.
  */
 async function assertNoSamples(data) {
-  const markers = ['data-sample="true"', '/hotels/sample-listing/', ...(data.sampleHotels ?? []).map((h) => h.name)];
+  const placeholders = (data.hotelRecords ?? []).filter((r) => r.record.placeholder === true);
+  const markers = [
+    'data-sample="true"',
+    'data-placeholder="true"',
+    '/hotels/sample-listing/',
+    'PLACEHOLDER Hotel',
+    ...(data.sampleHotels ?? []).map((h) => h.name),
+    ...placeholders.flatMap((r) => [r.record.name, `/hotels/${r.record.slug}/`]),
+  ];
+  const leaks = await findInDist(markers);
+  if (leaks.length) {
+    throw new Error(`Sample/placeholder content found in a build where it must be hidden:\n  • ${leaks.join('\n  • ')}`);
+  }
+}
+
+/**
+ * Safety rail (every build): hotels that are not public — draft, contacted,
+ * or verified-but-invalid — must never get a page, a link or a card.
+ */
+async function assertNoPrivateListings(data) {
+  const hidden = (data.hotelRecords ?? []).filter((r) => !r.isPublic && r.record.slug);
+  const markers = hidden.flatMap((r) => [`/hotels/${r.record.slug}/`, `data-hotel="${r.record.slug}"`]);
+  const leaks = await findInDist(markers);
+  if (leaks.length) {
+    throw new Error(`Unpublished hotel listing found in the build (only verified listings may appear):\n  • ${leaks.join('\n  • ')}`);
+  }
+}
+
+async function findInDist(markers) {
   const leaks = [];
   for (const file of await walk(DIST)) {
     if (!file.endsWith('.html')) continue;
     const html = await readFile(file, 'utf8');
     for (const m of markers) if (m && html.includes(m)) leaks.push(`${path.relative(DIST, file)} contains "${m}"`);
   }
-  if (leaks.length) {
-    throw new Error(`Sample content found in a build where samples must be hidden:\n  • ${leaks.join('\n  • ')}`);
-  }
+  return leaks;
 }
 
 // ---------------------------------------------------------------- main
@@ -396,8 +567,10 @@ async function main() {
   const onNetlify = process.env.NETLIFY === 'true';
   data.site.showSamples = onNetlify ? false : process.env.SHOW_SAMPLES !== '0';
 
-  const pages = await buildPages(data);
+  prepareHotels(data, await loadHotels());
+  const pages = await buildPages(data, hotelPages(data));
   if (!data.site.showSamples) await assertNoSamples(data);
+  await assertNoPrivateListings(data);
   const hashes = await copyAssets();
   await versionAssetUrls(hashes);
   await injectCsp(data.site);
@@ -409,6 +582,18 @@ async function main() {
   );
   console.log(`Indexing: ${data.site.indexing === true ? 'ON' : 'OFF (pre-launch)'} · sitemap entries: ${indexed}`);
   console.log(`Sample listings: ${data.site.showSamples ? 'SHOWN (local design build)' : 'HIDDEN (live / preview mode)'}`);
+  const recs = data.hotelRecords;
+  const real = recs.filter((r) => !r.record.placeholder);
+  const count = (s) => real.filter((r) => r.record.status === s).length;
+  console.log(
+    `Hotels: ${real.length} real record(s) — ${count('verified')} verified, ${count('contacted')} contacted, ${count('draft')} draft · ` +
+      `published: ${data.publicHotels.filter((h) => !h.placeholder).length} real` +
+      (data.site.showSamples ? ` + ${data.publicHotels.filter((h) => h.placeholder).length} placeholder (local only)` : '')
+  );
+  if (notices.length) {
+    console.log(`\n${notices.length} notice(s) (not errors):`);
+    for (const n of notices) console.log(`  · ${n}`);
+  }
   if (warnings.length) {
     console.warn(`\n${warnings.length} warning(s):`);
     for (const w of warnings) console.warn(`  • ${w}`);

@@ -32,9 +32,11 @@ No licensed photos are in the site yet. Commons downloads were blocked from this
 - Alternative: the licence-checked Wikimedia Commons shortlist in `assets-src/photos/manifest.json` (CC BY / CC BY-SA). This requires visible credit, and CC BY-SA images keep that licence. Download them from a normal connection, then run `python3 scripts/images.py`.
 - Hotel photos: only from the property with written permission.
 
-### 6. Build approach and URL structure
-- **Recommended:** keep the zero-dependency generator (`scripts/build.mjs`), with collections at `/hotels/<area-or-type>/`, hotels at `/hotels/<hotel-slug>/` and guides at `/guides/<slug>/`.
-- Confirm before hotel pages are built, so URLs never need to change.
+### 6. Build approach and URL structure: ✅ implemented (Task 02)
+- Zero-dependency generator (`scripts/build.mjs`): collections at `/hotels/<area-or-type>/`, hotels at `/hotels/<hotel-slug>/`, guides later at `/guides/<slug>/`.
+- "Luxury" renamed **"Premium"** (`/hotels/premium/`; the old `/hotels/luxury/` 301-redirects).
+- WhatsApp enquiries go to the **hotel's own number**; only **verified** listings are public. See `docs/HOTELS.md`.
+- **Next:** collect and verify the first real hotels.
 
 ### 7. Area list and wording
 The six areas (Mahakal Temple area, Ram Ghat & Shipra riverfront, Railway Station area, Freeganj, Nanakheda, Dewas Road) and their one-line descriptions are deliberately general. **Please check them with your local knowledge**, especially Freeganj, Nanakheda and Dewas Road, and add or replace areas if needed.

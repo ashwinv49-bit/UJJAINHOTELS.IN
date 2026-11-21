@@ -1,11 +1,67 @@
 [
-  { "path": "/hotels/", "title": "Hotels in Ujjain by Area and Type", "heading": "Browse hotels in Ujjain", "description": "Browse hotels in Ujjain by area and type of stay — near Mahakal Temple, Ram Ghat or the railway station. Listings are coming soon.", "intro": "Hotel listings by area and type of stay are being prepared." },
-  { "path": "/hotels/sample-listing/", "previewOnly": true, "title": "Sample Listing (Design Preview)", "heading": "This is a sample listing", "description": "Sample listing used to preview the HotelsUjjain.in design. It does not describe a real hotel.", "intro": "The hotel cards on our homepage are placeholders that show how listings will look. They do not describe real hotels, prices or amenities." },
-  { "path": "/guides/", "title": "Ujjain Travel Guides", "heading": "Ujjain travel guides", "description": "Practical guides for visiting Ujjain — where to stay, temple visits and planning for Simhastha 2028. Coming soon on HotelsUjjain.in.", "intro": "Practical guides to planning your visit to Ujjain are being written." },
-  { "path": "/about/", "title": "About HotelsUjjain.in", "heading": "About HotelsUjjain.in", "description": "About HotelsUjjain.in, a hotel discovery guide built only for Ujjain.", "intro": "HotelsUjjain.in helps visitors find the right place to stay in Ujjain." },
-  { "path": "/contact/", "title": "Contact HotelsUjjain.in", "heading": "Contact us", "description": "Contact HotelsUjjain.in for help finding a stay in Ujjain, or about listing your hotel.", "intro": "WhatsApp enquiries and contact details are being set up." },
-  { "path": "/list-your-hotel/", "title": "List Your Hotel on HotelsUjjain.in", "heading": "List your hotel", "description": "Own a hotel, guest house or dharamshala in Ujjain? Find out how to list it on HotelsUjjain.in.", "intro": "Free and featured listing options for Ujjain hotels, guest houses and dharamshalas are being prepared." },
-  { "path": "/advertise/", "title": "Advertise with HotelsUjjain.in", "heading": "Advertise with us", "description": "Reach visitors planning a trip to Ujjain. Advertising options for local businesses on HotelsUjjain.in.", "intro": "Advertising options for local businesses are being prepared." },
-  { "path": "/privacy-policy/", "title": "Privacy Policy", "heading": "Privacy policy", "description": "How HotelsUjjain.in handles personal information.", "intro": "Our privacy policy is being finalised and will be published before launch." },
-  { "path": "/terms/", "title": "Terms of Use", "heading": "Terms of use", "description": "Terms of use for HotelsUjjain.in.", "intro": "Our terms of use are being finalised and will be published before launch." }
+  {
+    "path": "/hotels/",
+    "title": "Hotels in Ujjain by Area and Type",
+    "heading": "Hotels in Ujjain",
+    "description": "Browse hotels in Ujjain by area, budget and facilities — near Mahakal Temple, Ram Ghat or the railway station. Every listing is checked with the property.",
+    "intro": "Every hotel here has been checked with the property. Filter by area, budget and facilities, then call or WhatsApp the hotel directly.",
+    "collection": "all"
+  },
+  {
+    "path": "/hotels/sample-listing/",
+    "previewOnly": true,
+    "title": "Sample Listing (Design Preview)",
+    "heading": "This is a sample listing",
+    "description": "Sample listing used to preview the HotelsUjjain.in design. It does not describe a real hotel.",
+    "intro": "The hotel cards on our homepage are placeholders that show how listings will look. They do not describe real hotels, prices or amenities."
+  },
+  {
+    "path": "/guides/",
+    "title": "Ujjain Travel Guides",
+    "heading": "Ujjain travel guides",
+    "description": "Practical guides for visiting Ujjain — where to stay, temple visits and planning for Simhastha 2028. Coming soon on HotelsUjjain.in.",
+    "intro": "Practical guides to planning your visit to Ujjain are being written."
+  },
+  {
+    "path": "/about/",
+    "title": "About HotelsUjjain.in",
+    "heading": "About HotelsUjjain.in",
+    "description": "About HotelsUjjain.in, a hotel discovery guide built only for Ujjain.",
+    "intro": "HotelsUjjain.in helps visitors find the right place to stay in Ujjain."
+  },
+  {
+    "path": "/contact/",
+    "title": "Contact HotelsUjjain.in",
+    "heading": "Contact us",
+    "description": "Contact HotelsUjjain.in for help finding a stay in Ujjain, or about listing your hotel.",
+    "intro": "WhatsApp enquiries and contact details are being set up."
+  },
+  {
+    "path": "/list-your-hotel/",
+    "title": "List Your Hotel on HotelsUjjain.in",
+    "heading": "List your hotel",
+    "description": "Own a hotel, guest house or dharamshala in Ujjain? Find out how to list it on HotelsUjjain.in.",
+    "intro": "Free and featured listing options for Ujjain hotels, guest houses and dharamshalas are being prepared."
+  },
+  {
+    "path": "/advertise/",
+    "title": "Advertise with HotelsUjjain.in",
+    "heading": "Advertise with us",
+    "description": "Reach visitors planning a trip to Ujjain. Advertising options for local businesses on HotelsUjjain.in.",
+    "intro": "Advertising options for local businesses are being prepared."
+  },
+  {
+    "path": "/privacy-policy/",
+    "title": "Privacy Policy",
+    "heading": "Privacy policy",
+    "description": "How HotelsUjjain.in handles personal information.",
+    "intro": "Our privacy policy is being finalised and will be published before launch."
+  },
+  {
+    "path": "/terms/",
+    "title": "Terms of Use",
+    "heading": "Terms of use",
+    "description": "Terms of use for HotelsUjjain.in.",
+    "intro": "Our terms of use are being finalised and will be published before launch."
+  }
 ]

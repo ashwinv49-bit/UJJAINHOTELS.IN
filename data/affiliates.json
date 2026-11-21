@@ -1,0 +1,11 @@
+{
+  "_readme": "Affiliate partners. A hotel's affiliate link is shown ONLY when its partner is enabled here AND the link is https AND its host is listed in that partner's hosts. Keep every partner disabled until you have an approved account and a real tracking link. Add your affiliate network's link host (e.g. a Cuelinks redirect domain) to hosts when you start using it.",
+  "partners": {
+    "agoda": { "name": "Agoda", "enabled": false, "hosts": ["www.agoda.com", "agoda.com"] },
+    "makemytrip": { "name": "MakeMyTrip", "enabled": false, "hosts": ["www.makemytrip.com", "makemytrip.com"] },
+    "goibibo": { "name": "Goibibo", "enabled": false, "hosts": ["www.goibibo.com", "goibibo.com"] },
+    "bookingcom": { "name": "Booking.com", "enabled": false, "hosts": ["www.booking.com", "booking.com"] },
+    "oyo": { "name": "OYO", "enabled": false, "hosts": ["www.oyorooms.com", "oyorooms.com"] },
+    "expedia": { "name": "Expedia", "enabled": false, "hosts": ["www.expedia.co.in", "www.expedia.com"] }
+  }
+}
