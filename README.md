@@ -3,7 +3,7 @@
 **HOTELS UJJAIN: Find Your Right Stay.**
 A mobile-first hotel discovery guide for Ujjain, Madhya Pradesh. It is *not* an online travel agency: no bookings, payments or inventory. Visitors discover places to stay, then contact hotels directly (WhatsApp) or go to booking partners (affiliate links). Revenue comes from affiliate commissions, labelled paid listings, direct enquiries and local advertising.
 
-> **Status: Task 01 complete (foundation + homepage prototype).** Live preview: **https://hotels-ujjain.netlify.app**. Hotel listings shown are labelled **samples**; indexing is switched off until launch.
+> **Status: Task 01 complete (foundation + homepage prototype).** Live: **https://hotelsujjain.in** (Netlify; preview alias https://hotels-ujjain.netlify.app). Hotel listings shown are labelled **samples**; indexing is switched off until launch.
 
 ---
 

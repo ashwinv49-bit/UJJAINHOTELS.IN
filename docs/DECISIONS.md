@@ -21,9 +21,9 @@ Deployed to your existing (empty) `hotels-ujjain` project on the Netlify Free pl
 - **Production branch:** there is no `main` yet. **Recommended:** I open a pull request to create `main`, and Netlify deploys `main` as production.
 - **Free-plan badge:** Netlify shows a "Powered by Netlify" badge that can't be hidden on the Free plan, and the CSP is relaxed slightly to let it render. A paid plan removes both trade-offs; this is your call before launch.
 
-### 4. DNS for hotelsujjain.in: Netlify DNS set up, waiting on GoDaddy
-Netlify side done (zone + records + domain attached). 🔒 **You:** at GoDaddy, change the nameservers to `dns1`–`dns4.p06.nsone.net` (`DEPLOYMENT.md` §3).
-- **Approve?** Email anti-spoofing records for the new zone: SPF `v=spf1 -all` and DMARC `v=DMARC1; p=reject`. The domain sends no email; GoDaddy's current DMARC record disappears when the nameservers move. Change them if you later add a mailbox on this domain.
+### 4. DNS for hotelsujjain.in: ✅ done
+Netlify DNS is active (nameservers switched at GoDaddy 21 Nov 2026), HTTPS certificate issued, `www` redirects to the apex.
+- **Still awaiting your approval:** email anti-spoofing records in the Netlify zone: SPF `v=spf1 -all` and DMARC `v=DMARC1; p=reject`. The domain sends no email, and GoDaddy's old DMARC record no longer applies since the switch. Change them if you later add a mailbox on this domain.
 
 ### 5. Photography
 No licensed photos are in the site yet. Commons downloads were blocked from this cloud environment.
