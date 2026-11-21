@@ -327,7 +327,7 @@ async function writeSeoFiles(site, pages) {
   const robots =
     site.indexing === true
       ? `# ${site.domainLabel}\nUser-agent: *\nAllow: /\n\nSitemap: ${base}/sitemap.xml\n`
-      : `# ${site.domainLabel} — PROTOTYPE / PRE-LAUNCH\n# Indexing is switched off (data/site.json → "indexing": false).\n# Set it to true at launch to publish the production robots.txt.\nUser-agent: *\nDisallow: /\n\nSitemap: ${base}/sitemap.xml\n`;
+      : `# ${site.domainLabel} — PROTOTYPE / PRE-LAUNCH\n# Indexing is off: pre-launch (data/site.json → "indexing": false)\n# or a non-production Netlify build (Deploy Preview / branch deploy).\nUser-agent: *\nDisallow: /\n\nSitemap: ${base}/sitemap.xml\n`;
   await writeFile(path.join(DIST, 'robots.txt'), robots);
   return indexable.length;
 }
@@ -340,6 +340,13 @@ async function main() {
 
   const data = await loadData();
   if (!data.site?.url) throw new Error('data/site.json must define "url"');
+
+  // On Netlify, only the production context may ever be indexable: branch
+  // deploys are publicly crawlable by default, so force noindex there.
+  if (process.env.NETLIFY === 'true' && process.env.CONTEXT !== 'production' && data.site.indexing) {
+    data.site.indexing = false;
+    console.log(`Netlify context "${process.env.CONTEXT}": indexing forced OFF`);
+  }
 
   const pages = await buildPages(data);
   const hashes = await copyAssets();

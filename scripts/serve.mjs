@@ -2,7 +2,8 @@
 /**
  * Minimal local preview server for dist/ (no dependencies).
  *   node scripts/serve.mjs [port]     → http://localhost:4173
- * Mirrors static-host behaviour: /about/ → about/index.html, unknown paths → 404.html.
+ * Mirrors Netlify: /about/ → about/index.html, unknown paths → 404.html, and the
+ * rules in dist/_headers (CSP etc.) are applied so QA catches header problems.
  */
 import { createServer } from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
@@ -29,6 +30,29 @@ const TYPES = {
   '.webmanifest': 'application/manifest+json',
 };
 
+/** Parse dist/_headers (Netlify syntax) so local previews send the same headers. */
+async function loadHeaderRules() {
+  try {
+    const rules = [];
+    let current = null;
+    for (const line of (await readFile(path.join(DIST, '_headers'), 'utf8')).split(/\r?\n/)) {
+      if (!line.trim() || line.trim().startsWith('#')) continue;
+      if (!/^\s/.test(line)) {
+        current = { pattern: line.trim(), headers: {} };
+        rules.push(current);
+      } else if (current) {
+        const i = line.indexOf(':');
+        current.headers[line.slice(0, i).trim()] = line.slice(i + 1).trim();
+      }
+    }
+    return rules;
+  } catch {
+    return [];
+  }
+}
+const matches = (pattern, urlPath) =>
+  pattern.endsWith('*') ? urlPath.startsWith(pattern.slice(0, -1)) : urlPath === pattern;
+
 async function resolveFile(urlPath) {
   const clean = path.normalize(decodeURIComponent(urlPath)).replace(/^(\.\.[/\\])+/, '');
   let file = path.join(DIST, clean);
@@ -46,8 +70,18 @@ async function resolveFile(urlPath) {
   }
 }
 
+const headerRules = await loadHeaderRules();
+
 createServer(async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host}`);
+  for (const rule of headerRules) {
+    if (!matches(rule.pattern, url.pathname)) continue;
+    for (const [k, v] of Object.entries(rule.headers)) {
+      // HSTS and upgrade-insecure-requests would break plain-http localhost
+      if (k === 'Strict-Transport-Security') continue;
+      res.setHeader(k, k === 'Content-Security-Policy' ? v.replace(/;\s*upgrade-insecure-requests/, '') : v);
+    }
+  }
   const hit = await resolveFile(url.pathname);
   if (hit?.redirect) {
     res.writeHead(301, { Location: hit.redirect + url.search });

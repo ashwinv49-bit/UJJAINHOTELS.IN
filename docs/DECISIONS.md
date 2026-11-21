@@ -15,13 +15,14 @@ It currently takes bookings (VikBooking) and has a refund policy and terms built
 - **Recommended:** leave it untouched until the new site launches, then back it up and 301-redirect it (mapping in `DEPLOYMENT.md` §5). In the meantime, consider switching off the VikBooking search so no one tries to book.
 - Please confirm you own **both** domains and that the WordPress site is yours to change.
 
-### 3. Hosting
-- **Recommended:** **Cloudflare Pages** (free, fast in India, preview URL per branch).
-- Alternative: **Hostinger** (already paid; manual or Action-based upload). Details in `DEPLOYMENT.md`.
+### 3. Hosting: ✅ decided, Netlify
+Your separate Netlify account will host the site. The repo is configured (`netlify.toml`, `_headers`, noindex on non-production builds). Still needed from you:
+- 🔒 Connect the repo in Netlify (steps in `DEPLOYMENT.md` §2), or ask me to deploy with the Netlify CLI using a personal access token.
+- **Production branch:** there is no `main` yet; GitHub currently treats `ccr-db98cbba-h9x0d2` as the default branch. **Recommended:** I open a pull request to create `main`, and Netlify deploys `main` as production.
 
-### 4. DNS approach (if Cloudflare)
-- **Recommended:** move hotelsujjain.in's **nameservers** to Cloudflare. Registration stays at GoDaddy.
-- Alternative: keep GoDaddy DNS and use `www` as the canonical host.
+### 4. DNS approach for hotelsujjain.in
+- **Recommended:** **Netlify DNS**: point GoDaddy's nameservers at Netlify. Registration stays at GoDaddy; Netlify manages records and SSL.
+- Alternative: keep GoDaddy DNS, replace the two parking A records with Netlify's load-balancer IP, and point `www` to `<project>.netlify.app`.
 
 ### 5. Photography
 No licensed photos are in the site yet. Commons downloads were blocked from this cloud environment.
@@ -47,7 +48,7 @@ Many visitors, and your existing About page, are Hindi-first.
 - **Recommended:** English-first, with Hindi versions of key pages (home, areas, Mahakal guide) using `hreflang`. This needs a Devanagari font (e.g. Noto Sans Devanagari) added to the design system.
 
 ### 10. Analytics and consent
-- **Recommended:** **Cloudflare Web Analytics** (free, cookieless, no consent banner needed).
+- **Recommended:** a cookie-free analytics tool (e.g. Cloudflare Web Analytics, free; or Netlify's analytics add-on), so no consent banner is needed.
 - Alternative: Google Analytics 4, which needs a cookie-consent banner and a privacy-policy update.
 
 ### 11. Affiliate programmes

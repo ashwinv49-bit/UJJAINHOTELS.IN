@@ -4,6 +4,7 @@
  *   node scripts/qa-browser.cjs [screenshotDir]
  * Optional: AXE_PATH=/path/to/axe.min.js for automated accessibility checks.
  *
+ * The preview server applies dist/_headers, so CSP violations show up as console errors.
  * Checks: console errors, failed requests, horizontal overflow at 360/768/1440px,
  * mobile nav toggle, search routing, keyboard focus visibility, and axe (WCAG A/AA).
  */
@@ -59,7 +60,8 @@ const pass = (m) => console.log(`  ✓ ${m}`);
           await page.screenshot({ path: path.join(SHOTS, `home-${vp.name}-fold.png`) });
         }
         if (AXE) {
-          await page.addScriptTag({ content: AXE });
+          // Evaluated via DevTools, so the site's CSP (which blocks injected inline scripts) still applies to the page itself
+          await page.evaluate(`${AXE};true`);
           const res = await page.evaluate(() =>
             window.axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'] } })
           );

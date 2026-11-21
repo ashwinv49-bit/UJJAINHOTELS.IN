@@ -1,17 +1,16 @@
-# Cloudflare Pages / Netlify response headers.
-# (Apache/Hostinger equivalent: docs/DEPLOYMENT.md → .htaccess)
+# Netlify response headers (same syntax works on Cloudflare Pages).
+# Apache/Hostinger equivalent: deploy/hostinger/.htaccess
+# Note: Netlify only allows * at the END of a path segment.
 
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
-  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
   X-Frame-Options: SAMEORIGIN
   Strict-Transport-Security: max-age=31536000
   Content-Security-Policy: default-src 'self'; img-src 'self' data:; style-src 'self'; font-src 'self'; script-src 'self' {{INLINE_SCRIPT_HASHES}}; connect-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests
 
 # CSS/JS URLs carry ?v=<content-hash>; fonts and images are renamed when replaced.
+# HTML keeps Netlify's default (max-age=0, must-revalidate).
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
-
-/*.html
-  Cache-Control: public, max-age=0, must-revalidate

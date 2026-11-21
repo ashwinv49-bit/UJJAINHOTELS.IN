@@ -78,9 +78,9 @@ Looked up through a public DNS-over-HTTPS resolver. No DNS records were changed.
 
 ## 5. Hosting compatibility
 
-The new site builds to plain static files (HTML, CSS, JS, images). It needs **no PHP, database or server runtime**, so it runs on any static host or CDN:
+The new site builds to plain static files (HTML, CSS, JS, images). It needs **no PHP, database or server runtime**, so it runs on any static host or CDN. **Decision (after the audit): hosting on Netlify**, using a separate Netlify account (see `DEPLOYMENT.md`). Options considered:
 
-- **Cloudflare Pages / Netlify / GitHub Pages:** builds straight from GitHub, deploy previews, free SSL.
+- **Netlify** ✅ / Cloudflare Pages / GitHub Pages: builds straight from GitHub, deploy previews, free SSL.
 - **Hostinger (current host):** static files are served by LiteSpeed with free SSL. Git deployment is possible, but it does not run a build step (see `DEPLOYMENT.md`).
 
 Server features not currently needed: PHP, MySQL, cron. They become relevant only if we later add server-side enquiry forms or an owner dashboard.

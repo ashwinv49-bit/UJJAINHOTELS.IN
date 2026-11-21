@@ -38,7 +38,7 @@ node scripts/qa-browser.cjs    # Playwright: layouts, console errors, nav, searc
 │   │   ├── fonts/            # Self-hosted Inter + Playfair Display (OFL)
 │   │   ├── icons/            # Favicon + app icons (original brand mark)
 │   │   └── images/           # Optimised images (og/, photos/)
-│   └── static/               # Copied to the site root: _headers, favicon.ico, site.webmanifest
+│   └── static/               # Copied to the site root: _headers (Netlify), favicon.ico, site.webmanifest
 ├── data/                     # Content as data
 │   ├── site.json             # Domain, brand, contact, prototype/indexing switches
 │   ├── categories.json       # Homepage categories
@@ -51,12 +51,17 @@ node scripts/qa-browser.cjs    # Playwright: layouts, console errors, nav, searc
 │   └── schema/hotel.schema.json   # Data contract for real listings (incl. verification)
 ├── assets-src/photos/        # Photo manifest (originals are git-ignored)
 ├── scripts/                  # build, serve, qa, qa-browser, images, brand-asset rendering
-├── deploy/hostinger/         # .htaccess for Apache/LiteSpeed hosting
+├── netlify.toml              # Netlify build settings
+├── deploy/hostinger/         # .htaccess if ever hosted on Apache/LiteSpeed (not used on Netlify)
 ├── docs/                     # Audit, design system, deployment, SEO checklist, decisions
 └── .github/workflows/ci.yml  # Build + static QA on every push (no deployment)
 ```
 
 `dist/` is the build output (git-ignored). This is the folder a host serves.
+
+## Hosting: Netlify
+
+`netlify.toml` tells Netlify to run `node scripts/build.mjs --strict` and publish `dist/` (Node 22). Headers come from `dist/_headers`. Non-production Netlify builds (Deploy Previews, branch deploys) are always `noindex`. Setup and domain steps: [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
 
 ## How the build works
 
@@ -107,6 +112,6 @@ Never invent hotel names, prices, ratings, amenities, availability or reviews. S
 
 - [Audit report](docs/AUDIT.md)
 - [Design system](docs/DESIGN-SYSTEM.md)
-- [Hosting & deployment](docs/DEPLOYMENT.md)
+- [Hosting & deployment (Netlify)](docs/DEPLOYMENT.md)
 - [SEO & technical checklist](docs/SEO-CHECKLIST.md)
 - [Decisions needed](docs/DECISIONS.md)

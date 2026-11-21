@@ -11,6 +11,9 @@ assets-src/photos/*.png
 assets-src/photos/*.tif
 
 node_modules/
+
+# Netlify CLI link state (never commit)
+.netlify/
 .DS_Store
 Thumbs.db
 *.log

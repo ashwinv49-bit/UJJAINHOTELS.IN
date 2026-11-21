@@ -1,0 +1,15 @@
+# HotelsUjjain.in — Netlify build settings.
+# This file overrides the matching fields in the Netlify UI.
+# Security and cache headers are generated into dist/_headers by the build
+# (so the Content-Security-Policy can include inline-script hashes).
+
+[build]
+  command = "node scripts/build.mjs --strict"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Every non-production build (Deploy Previews, branch deploys) is forced to
+# noindex by scripts/build.mjs, using Netlify's CONTEXT variable.
+# Do NOT put secrets in this file: the repository is public.

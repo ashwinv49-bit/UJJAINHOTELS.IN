@@ -16,7 +16,7 @@ Status as of 21 November 2026 (Task 01: foundation + homepage prototype).
 | `lang="en-IN"`, viewport, theme-color, manifest, favicons | ✅ | |
 | Internal linking (categories, areas, guides, footer) | ✅ | 0 broken internal links (QA) |
 | Breadcrumbs | ✅ (visual) | `BreadcrumbList` schema to add with the real inner pages |
-| Hindi / bilingual pages (`hreflang`) | ⬜ | Decision 7 |
+| Hindi / bilingual pages (`hreflang`) | ⬜ | Decision 9 |
 
 ## Indexing controls
 
@@ -56,15 +56,16 @@ Techniques: no frameworks; one minified CSS file and one deferred 2.7 KB script;
 
 | Item | Status |
 |---|---|
-| HTTPS + HSTS | 🟡 configured in `_headers` / `.htaccess`; certificate issued at deploy |
-| www → apex 301 | 🟡 host-level rule (see DEPLOYMENT.md) |
-| Security headers (CSP, nosniff, referrer, permissions, frame) | ✅ in `_headers`; CSP hashes inline scripts automatically |
+| HTTPS + HSTS | 🟡 HSTS in `_headers`; Netlify issues the Let's Encrypt certificate when the domain is attached |
+| www → apex 301 | 🟡 automatic on Netlify once `hotelsujjain.in` is the primary domain |
+| Previews never indexed | ✅ Netlify adds `noindex` to Deploy Previews; our build also forces `noindex` on branch deploys |
+| Security headers (CSP, nosniff, referrer, permissions, frame) | ✅ in `_headers` (Netlify); CSP hashes inline scripts automatically; verified in Chromium: own script allowed, injected scripts blocked, no console errors |
 | Mobile-friendly at 360 / 768 / 1440 px, no horizontal scroll | ✅ Playwright QA |
 | Works without JavaScript (nav, search form) | ✅ |
 | Console errors / failed requests | ✅ none |
 | Accessibility (axe-core, WCAG 2.2 A/AA) | ✅ 0 violations |
 | Google Search Console + sitemap submission | ⬜ at launch |
-| Analytics (privacy-friendly) + consent | ⬜ Decision 8 |
+| Analytics (privacy-friendly) + consent | ⬜ Decision 10 |
 
 ## Content (before launch)
 
