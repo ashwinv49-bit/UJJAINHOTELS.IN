@@ -1,0 +1,23 @@
+# Build the site and run static QA on every push and pull request.
+# This workflow does not deploy anything.
+name: Build & QA
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build (fails on template/SEO warnings)
+        run: node scripts/build.mjs --strict
+      - name: Static QA (links, assets, meta, headings, alt text, JSON-LD)
+        run: node scripts/qa.mjs

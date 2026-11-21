@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hotelsujjain.in/schema/hotel.schema.json",
+  "title": "Hotel listing",
+  "description": "Data contract for one hotel listing on HotelsUjjain.in. Every factual field must be verified from a named source before publishing. Do not publish a listing that has no verification record.",
+  "type": "object",
+  "required": ["slug", "name", "area", "categories", "address", "listing", "verification"],
+  "additionalProperties": false,
+  "properties": {
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "URL slug. The page is published at /hotels/<slug>/. Must not clash with collection slugs (areas, stay types)."
+    },
+    "name": { "type": "string", "description": "Exact trading name as shown on the property / registration." },
+    "area": { "type": "string", "description": "Slug from data/areas.json." },
+    "categories": {
+      "type": "array",
+      "items": { "enum": ["budget", "family", "luxury", "near-mahakal-temple", "near-railway-station"] },
+      "minItems": 1
+    },
+    "propertyType": { "enum": ["hotel", "resort", "guest-house", "homestay", "dharamshala", "lodge"] },
+    "summary": { "type": "string", "maxLength": 300, "description": "Short factual description written by us, not copied from another site." },
+    "address": {
+      "type": "object",
+      "required": ["street", "locality", "postalCode"],
+      "properties": {
+        "street": { "type": "string" },
+        "locality": { "type": "string" },
+        "city": { "const": "Ujjain" },
+        "region": { "const": "Madhya Pradesh" },
+        "postalCode": { "type": "string", "pattern": "^4560[0-9]{2}$" }
+      }
+    },
+    "geo": {
+      "type": "object",
+      "properties": { "lat": { "type": "number" }, "lng": { "type": "number" } },
+      "description": "Coordinates taken from the property's verified map pin."
+    },
+    "distances": {
+      "type": "object",
+      "description": "Road or walking distances in km, measured by us with a map tool. Record the method.",
+      "properties": {
+        "mahakalTempleKm": { "type": "number" },
+        "ramGhatKm": { "type": "number" },
+        "railwayStationKm": { "type": "number" },
+        "method": { "type": "string" }
+      }
+    },
+    "priceBand": {
+      "enum": ["budget", "mid", "premium"],
+      "description": "Broad band only. We never show live prices or availability."
+    },
+    "amenities": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Only amenities confirmed by the property in writing or seen in person."
+    },
+    "photos": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["src", "alt", "rights"],
+        "properties": {
+          "src": { "type": "string" },
+          "alt": { "type": "string" },
+          "rights": {
+            "enum": ["own-photo", "supplied-by-property-with-permission", "licensed"],
+            "description": "Never use photos copied from OTAs, Google Maps or other websites."
+          },
+          "credit": { "type": "string" },
+          "permissionRef": { "type": "string", "description": "Where the written permission is stored." }
+        }
+      }
+    },
+    "contact": {
+      "type": "object",
+      "properties": {
+        "whatsapp": { "type": "string", "pattern": "^91[0-9]{10}$" },
+        "phone": { "type": "string" },
+        "website": { "type": "string", "format": "uri" }
+      }
+    },
+    "affiliateLinks": {
+      "type": "array",
+      "description": "Rendered with rel=\"sponsored noopener\" and a visible disclosure.",
+      "items": {
+        "type": "object",
+        "required": ["partner", "url"],
+        "properties": { "partner": { "type": "string" }, "url": { "type": "string", "format": "uri" } }
+      }
+    },
+    "listing": {
+      "type": "object",
+      "required": ["tier"],
+      "properties": {
+        "tier": { "enum": ["free", "featured"], "description": "Featured = paid placement, always labelled on the page." },
+        "featuredUntil": { "type": "string", "format": "date" }
+      }
+    },
+    "verification": {
+      "type": "object",
+      "required": ["lastVerified", "method"],
+      "properties": {
+        "lastVerified": { "type": "string", "format": "date" },
+        "method": { "enum": ["site-visit", "phone-call", "owner-submitted-and-confirmed"] },
+        "verifiedBy": { "type": "string" },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}

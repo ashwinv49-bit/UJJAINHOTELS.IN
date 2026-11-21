@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="{{ site.lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page.title }}</title>
+  <meta name="description" content="{{ page.description }}">
+  <meta name="robots" content="{{ page.robots }}">
+  <link rel="canonical" href="{{ page.canonical }}">
+
+  <meta property="og:type" content="{{ page.ogType }}">
+  <meta property="og:site_name" content="{{ site.domainLabel }}">
+  <meta property="og:locale" content="{{ site.locale }}">
+  <meta property="og:title" content="{{ page.title }}">
+  <meta property="og:description" content="{{ page.description }}">
+  <meta property="og:url" content="{{ page.canonical }}">
+  <meta property="og:image" content="{{ page.ogImage }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="{{ site.domainLabel }} — {{ site.tagline }}">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <meta name="theme-color" content="{{ site.themeColor }}">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/assets/icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/playfair-display-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+  {{{ page.headExtra }}}
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script>document.documentElement.classList.add('js')</script>
+  <script src="/assets/js/main.js" defer></script>
+  {{{ page.structuredData }}}
+</head>
+<body class="{{ page.bodyClass }}">
+  <a class="skip-link" href="#main">Skip to main content</a>
+  {{> icons }}
+  {{> prototype-bar }}
+  {{> header }}
+  <main id="main" tabindex="-1">
+{{{ content }}}
+  </main>
+  {{> footer }}
+</body>
+</html>

@@ -1,0 +1,83 @@
+/* ==========================================================================
+   Layout primitives
+   ========================================================================== */
+.container {
+  width: min(100% - 2 * var(--gutter), var(--container));
+  margin-inline: auto;
+}
+.container--narrow {
+  width: min(100% - 2 * var(--gutter), var(--container-narrow));
+}
+
+.section {
+  padding-block: var(--section-space);
+}
+.section--white {
+  background: var(--white);
+}
+.section--alt {
+  background: var(--color-surface-alt);
+}
+.section--dark {
+  background: var(--color-surface-dark);
+  color: var(--color-text-on-dark);
+}
+
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-4) var(--space-6);
+  margin-bottom: clamp(var(--space-5), 3vw, var(--space-7));
+}
+.section-head__text {
+  max-width: 40rem;
+}
+.section-head h2 {
+  font-size: var(--step-3);
+}
+.section-head p:not(.eyebrow) {
+  margin-top: var(--space-3);
+  color: var(--color-text-muted);
+  font-size: var(--step-1);
+  line-height: var(--leading-snug);
+}
+.section--dark .section-head p:not(.eyebrow) {
+  color: var(--color-text-on-dark-muted);
+}
+
+/* Eyebrow label with a short gold rule */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+  font-family: var(--font-body);
+  font-size: var(--step--1);
+  font-weight: 650;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--color-accent-text);
+}
+.eyebrow::before {
+  content: "";
+  width: 1.75rem;
+  height: 1px;
+  background: currentColor;
+}
+.section--dark .eyebrow,
+.on-dark .eyebrow {
+  color: var(--gold-500);
+}
+
+.stack > * + * {
+  margin-top: var(--space-4);
+}
+
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}

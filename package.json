@@ -1,0 +1,17 @@
+{
+  "name": "hotelsujjain",
+  "version": "0.1.0",
+  "private": true,
+  "description": "HotelsUjjain.in — hotel discovery guide for Ujjain (static site).",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "build:strict": "node scripts/build.mjs --strict",
+    "serve": "node scripts/serve.mjs",
+    "dev": "node scripts/build.mjs && node scripts/serve.mjs",
+    "qa": "node scripts/build.mjs --strict && node scripts/qa.mjs"
+  }
+}

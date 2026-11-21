@@ -1,0 +1,18 @@
+{
+  "name": "Hotels Ujjain",
+  "brand": "HOTELS UJJAIN",
+  "domainLabel": "HotelsUjjain.in",
+  "tagline": "Find Your Right Stay.",
+  "url": "https://hotelsujjain.in",
+  "lang": "en-IN",
+  "locale": "en_IN",
+  "indexing": false,
+  "prototype": true,
+  "themeColor": "#172E35",
+  "defaultOgImage": "/assets/images/og/og-default.jpg",
+  "contact": {
+    "whatsapp": "",
+    "email": "",
+    "enquiryMessage": "Namaste! I found HotelsUjjain.in and would like help finding a stay in Ujjain."
+  }
+}

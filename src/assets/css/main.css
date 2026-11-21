@@ -1,0 +1,8 @@
+/* HOTELS UJJAIN — stylesheet entry point.
+   The build inlines these imports into one minified file (dist/assets/css/main.css).
+   Order matters: tokens → base → layout → components → sections. */
+@import "_tokens.css";
+@import "_base.css";
+@import "_layout.css";
+@import "_components.css";
+@import "_sections.css";

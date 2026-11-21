@@ -1,0 +1,13 @@
+{
+  "name": "HotelsUjjain.in",
+  "short_name": "Hotels Ujjain",
+  "description": "Find Your Right Stay in Ujjain.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#F7F5F0",
+  "theme_color": "#172E35",
+  "icons": [
+    { "src": "/assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/assets/icons/logo-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

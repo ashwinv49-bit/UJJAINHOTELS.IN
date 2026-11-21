@@ -1,0 +1,5 @@
+[
+  { "value": "budget", "label": "Budget" },
+  { "value": "family", "label": "Family-friendly" },
+  { "value": "luxury", "label": "Luxury" }
+]

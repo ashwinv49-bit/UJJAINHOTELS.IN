@@ -1,0 +1,42 @@
+[
+  {
+    "_note": "SAMPLE CONTENT FOR DESIGN PREVIEW ONLY. These are not real hotels. Never publish with indexing on.",
+    "sample": true,
+    "name": "Sample Hotel A",
+    "area": "Mahakal Temple area",
+    "type": "Near temple",
+    "summary": "Placeholder text showing where a short, factual description of the hotel will appear.",
+    "highlights": ["Family rooms", "Parking", "Lift"],
+    "distanceNote": "Sample distance to Mahakal Temple",
+    "priceNote": "Price on enquiry",
+    "featured": true,
+    "tone": "teal",
+    "url": "/hotels/sample-listing/"
+  },
+  {
+    "sample": true,
+    "name": "Sample Hotel B",
+    "area": "Railway Station area",
+    "type": "Budget",
+    "summary": "Placeholder text showing where a short, factual description of the hotel will appear.",
+    "highlights": ["24-hour desk", "Wi-Fi"],
+    "distanceNote": "Sample distance to Ujjain Junction",
+    "priceNote": "Price on enquiry",
+    "featured": false,
+    "tone": "gold",
+    "url": "/hotels/sample-listing/"
+  },
+  {
+    "sample": true,
+    "name": "Sample Resort C",
+    "area": "Dewas Road",
+    "type": "Luxury",
+    "summary": "Placeholder text showing where a short, factual description of the hotel will appear.",
+    "highlights": ["Restaurant", "Pool", "Parking"],
+    "distanceNote": "Sample distance to Mahakal Temple",
+    "priceNote": "Price on enquiry",
+    "featured": false,
+    "tone": "deep",
+    "url": "/hotels/sample-listing/"
+  }
+]

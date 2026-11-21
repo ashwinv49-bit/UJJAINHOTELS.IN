@@ -1,0 +1,85 @@
+{
+  "_readme": "Source photos for scripts/images.py. Put each original at assets-src/photos/<key>.jpg (not committed), then run: python3 scripts/images.py. Only use photos whose licence you have checked on the source page. CC BY-SA images must stay credited, and our resized versions are shared under the same licence. Alt text was drafted from the file titles before the images could be viewed: check each photo and set altVerified to true.",
+  "photos": {
+    "hero": {
+      "file": "hero.jpg",
+      "alt": "Ram Ghat on the Shipra river in Ujjain, with temples along the riverbank",
+      "focus": "50% 60%",
+      "usedFor": "Homepage hero",
+      "credit": {
+        "title": "Ujjain, Ram Ghat (9840921865)",
+        "author": "Arian Zwegers",
+        "source": "https://commons.wikimedia.org/wiki/File:Ujjain,_Ram_Ghat_(9840921865).jpg",
+        "download": "https://upload.wikimedia.org/wikipedia/commons/a/a4/Ujjain%2C_Ram_Ghat_%289840921865%29.jpg",
+        "licence": "CC BY 2.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+        "modified": true
+      },
+      "altVerified": false
+    },
+    "mahakal-temple": {
+      "file": "mahakal-temple.jpg",
+      "alt": "The spire of Shri Mahakaleshwar Temple in Ujjain",
+      "focus": "50% 40%",
+      "usedFor": "Mahakal area card, Mahakal guide",
+      "credit": {
+        "title": "Mahakaleshwar Temple, Ujjain",
+        "author": "Ashverse",
+        "source": "https://commons.wikimedia.org/wiki/File:Mahakaleshwar_Temple,_Ujjain.jpg",
+        "download": "https://upload.wikimedia.org/wikipedia/commons/7/75/Mahakaleshwar_Temple%2C_Ujjain.jpg",
+        "licence": "CC BY-SA 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "modified": true
+      },
+      "altVerified": false
+    },
+    "ram-ghat": {
+      "file": "ram-ghat.jpg",
+      "alt": "Steps of Ram Ghat leading down to the Shipra river, Ujjain",
+      "focus": "50% 50%",
+      "usedFor": "Ram Ghat area card, area guide",
+      "credit": {
+        "title": "Ram Ghat, Ujjain 01",
+        "author": "Bernard Gagnon",
+        "source": "https://commons.wikimedia.org/wiki/File:Ram_Ghat,_Ujjain_01.jpg",
+        "download": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Ram_Ghat%2C_Ujjain_01.jpg",
+        "licence": "CC BY-SA 3.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "modified": true
+      },
+      "altVerified": false
+    },
+    "railway-station": {
+      "file": "railway-station.jpg",
+      "alt": "Ujjain Junction railway station building",
+      "focus": "50% 50%",
+      "usedFor": "Railway Station area card",
+      "credit": {
+        "title": "Ujjain Junction",
+        "author": "Superfast1111",
+        "source": "https://commons.wikimedia.org/wiki/File:Ujjain_Junction.jpg",
+        "download": "https://upload.wikimedia.org/wikipedia/commons/3/33/Ujjain_Junction.jpg",
+        "licence": "CC BY-SA 3.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "modified": true
+      },
+      "altVerified": false
+    },
+    "simhastha": {
+      "file": "simhastha.jpg",
+      "alt": "Pilgrims bathing in the Shipra river during Simhastha 2016, Ujjain",
+      "focus": "50% 50%",
+      "usedFor": "Simhastha guide",
+      "credit": {
+        "title": "Simhasth2016 Ujjain Snan1",
+        "author": "Suyash Dwivedi",
+        "source": "https://commons.wikimedia.org/wiki/File:Simhasth2016_Ujjain_Snan1.jpg",
+        "download": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Simhasth2016_Ujjain_Snan1.jpg",
+        "licence": "CC BY-SA 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "modified": true
+      },
+      "altVerified": false
+    }
+  }
+}

@@ -1,0 +1,61 @@
+[
+  {
+    "slug": "near-mahakal-temple",
+    "title": "Mahakal Temple area",
+    "searchLabel": "Near Mahakal Temple",
+    "summary": "The heart of pilgrim Ujjain, around the temple and the Mahakal Lok corridor.",
+    "goodFor": ["Darshan", "Bhasma Aarti"],
+    "photo": "mahakal-temple",
+    "url": "/hotels/near-mahakal-temple/"
+  },
+  {
+    "slug": "near-ram-ghat",
+    "title": "Ram Ghat & Shipra riverfront",
+    "searchLabel": "Near Ram Ghat",
+    "summary": "On the banks of the Shipra, close to the ghats and the evening aarti.",
+    "goodFor": ["Ghats", "Evening aarti"],
+    "photo": "ram-ghat",
+    "pageTitle": "Hotels near Ram Ghat, Ujjain",
+    "description": "Find hotels near Ram Ghat and the Shipra riverfront in Ujjain. Listings are coming soon on HotelsUjjain.in.",
+    "url": "/hotels/near-ram-ghat/"
+  },
+  {
+    "slug": "near-railway-station",
+    "title": "Railway Station area",
+    "searchLabel": "Near Railway Station",
+    "summary": "Around Ujjain Junction — practical for early trains and short stopovers.",
+    "goodFor": ["Train travel", "Stopovers"],
+    "photo": "railway-station",
+    "url": "/hotels/near-railway-station/"
+  },
+  {
+    "slug": "freeganj",
+    "title": "Freeganj",
+    "searchLabel": "Freeganj",
+    "summary": "A busy market district near the station, with shops and places to eat.",
+    "goodFor": ["Shopping", "Dining"],
+    "pageTitle": "Hotels in Freeganj, Ujjain",
+    "description": "Find hotels in Freeganj, Ujjain's busy market district near the railway station. Listings are coming soon on HotelsUjjain.in.",
+    "url": "/hotels/freeganj/"
+  },
+  {
+    "slug": "nanakheda",
+    "title": "Nanakheda",
+    "searchLabel": "Nanakheda",
+    "summary": "Around the Nanakheda bus stand, convenient for journeys by road.",
+    "goodFor": ["Bus travel", "Road trips"],
+    "pageTitle": "Hotels in Nanakheda, Ujjain",
+    "description": "Find hotels in Nanakheda, Ujjain, near the bus stand and convenient for road journeys. Listings are coming soon on HotelsUjjain.in.",
+    "url": "/hotels/nanakheda/"
+  },
+  {
+    "slug": "dewas-road",
+    "title": "Dewas Road",
+    "searchLabel": "Dewas Road",
+    "summary": "A main road out of the city, suited to travellers with their own vehicle.",
+    "goodFor": ["Self-drive", "Road access"],
+    "pageTitle": "Hotels on Dewas Road, Ujjain",
+    "description": "Find hotels along Dewas Road in Ujjain, suited to travellers with their own vehicle. Listings are coming soon on HotelsUjjain.in.",
+    "url": "/hotels/dewas-road/"
+  }
+]
