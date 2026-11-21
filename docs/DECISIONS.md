@@ -52,8 +52,8 @@ Many visitors, and your existing About page, are Hindi-first.
 - **Recommended:** a cookie-free analytics tool (e.g. Cloudflare Web Analytics, free; or Netlify's analytics add-on), so no consent banner is needed.
 - Alternative: Google Analytics 4, which needs a cookie-consent banner and a privacy-policy update.
 
-### 11. Affiliate programmes
-Which booking partners to join? Common options for India: Booking.com Affiliate Partner Programme, Agoda Partners, or MakeMyTrip/Goibibo through affiliate networks. Each needs its own sign-up and approval, and its terms will shape the disclosure wording.
+### 11. Affiliate programmes: plan ready → `docs/AFFILIATE-PLAN.md`
+**Recommended:** phase 1 = MakeMyTrip + Goibibo through one Indian network (Cuelinks or vCommission; flat ₹ per booking, INR payouts), plus **Agoda Partners** once real area pages are live. Booking.com (via CJ), OYO and Expedia later. Decisions listed in the plan §8.
 
 ### 12. Paid listings and advertising
 - Pricing model for **featured listings** (monthly or seasonal), and whether hotels can also pay for leads.
