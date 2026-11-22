@@ -54,6 +54,7 @@ Many visitors, and your existing About page, are Hindi-first.
 ### 10. Analytics and consent
 - **Recommended:** a cookie-free analytics tool (e.g. Cloudflare Web Analytics, free; or Netlify's analytics add-on), so no consent banner is needed.
 - Alternative: Google Analytics 4, which needs a cookie-consent banner and a privacy-policy update.
+- **New (22 Nov):** with affiliate-first (decision 17), we'll want to count clicks on partner buttons. GA4 can do this but needs consent; cookie-free tools generally can't report clicks per partner. Partner dashboards (with sub-IDs) report bookings either way. See `docs/SEO-AUDIT.md` T18.
 
 ### 11. Affiliate programmes: plan ready → `docs/AFFILIATE-PLAN.md`
 **Recommended:** phase 1 = MakeMyTrip + Goibibo through one Indian network (Cuelinks or vCommission; flat ₹ per booking, INR payouts), plus **Agoda Partners** once real area pages are live. Booking.com (via CJ), OYO and Expedia later. Decisions listed in the plan §8.
@@ -73,3 +74,22 @@ The temple-spire mark is original working artwork. Keep it, refine it, or supply
 
 ### 16. Merging this work
 The work is on branch `ccr-db98cbba-h9x0d2`. Say when you'd like a pull request to `main`.
+
+## C. SEO (from `docs/SEO-AUDIT.md` v2, 22 Nov 2026)
+
+### 17. Decided by you (22 Nov 2026): ✅
+- **`/hotels/` owns "Hotels in Ujjain".** The homepage becomes the welcome/discovery page and links to `/hotels/`.
+- **Affiliate-first.** On hotel cards and profiles, the partner booking button comes first and Call/WhatsApp the hotel second. Where a hotel has no valid partner link, Call/WhatsApp stays the main button.
+- Both are **future site changes**, each with its own plan → preview → "go". Nothing has been built yet.
+
+### 18. "Premium" page vs "luxury" searches (audit C11)
+People search "luxury hotels in Ujjain" (720) and "4-star hotels in Ujjain" (1,600) (OpenSEO, India, directional).
+- **Recommended:** keep the `/hotels/premium/` address but title the page **"Luxury & Premium Hotels in Ujjain"**. Mention 4-star only where the star category is confirmed.
+
+### 19. URL style (audit C12)
+OpenSEO suggests flat addresses like `/hotels-in-ujjain/` and `/hotels-near-mahakal/`.
+- **Recommended:** keep the current `/hotels/near-mahakal-temple/`-style addresses. They're built and tested, they already contain the keywords, and keywords in addresses matter little.
+- Nothing is indexed yet, so switching now would still be cheap if you prefer.
+
+### 20. Connect Search Console to OpenSEO
+OpenSEO reports your Search Console property is **not connected** to the OpenSEO project, so it can't see real search data. Connect it inside OpenSEO (your account; I can't do this from here).
