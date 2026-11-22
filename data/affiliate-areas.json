@@ -1,0 +1,147 @@
+{
+  "_readme": "Research data: each booking partner's own page for hotels in each Ujjain area. NOT used by the website yet — nothing reads this file, and every partner stays switched off in data/affiliates.json. Store only partner page links and short page titles; never hotel names, prices, ratings or distances. Evidence: 'opened' = we loaded the page and its title matches; 'exists' = the page loads (partner sends unknown addresses to its 404 page) but its content needs JavaScript; 'search' = found in web/Google search with a matching title, but the partner blocks automated checks, so the owner must test it on a phone; 'openseo' = seen in an OpenSEO Google results check (India, 22 Nov 2026). Report: docs/AFFILIATE-LINKS.md",
+  "checked": "2026-11-22",
+  "programmes": {
+    "cuelinks": {
+      "status": "Owner joined (22 Nov 2026). Campaign approval and link format still to confirm in the dashboard.",
+      "subIds": "Up to 5 sub-ID parameters per tracking link (stated on each Cuelinks campaign page).",
+      "campaigns": {
+        "makemytrip": {
+          "source": "https://www.cuelinks.com/campaigns/makemytrip-homestays-affiliate-program",
+          "name": "MakeMyTrip (Hotels)",
+          "deeplink": "No",
+          "cookie": "30 days",
+          "tracking": "48 hours",
+          "validation": "45 days",
+          "payment": "60 days after validation",
+          "payoutShown": "Upto ₹135 per sale (category rates visible after login)",
+          "media": "Allowed: text link, banner, social media, coupons. Disallowed: Facebook ads, search ads (SEM), native/pop ads, HTML email.",
+          "notes": "Countries: India. Payout for new and repeat users. No minimum booking value stated on the campaign page."
+        },
+        "goibibo": {
+          "source": "https://www.cuelinks.com/campaigns/goibibo-affiliate-program",
+          "name": "Goibibo (Hotels)",
+          "deeplink": "No",
+          "cookie": "30 days",
+          "tracking": "48 hours",
+          "validation": "60 days",
+          "payment": "30 days after validation",
+          "payoutShown": "Upto ₹252 per sale (category rates visible after login)",
+          "media": "Allowed: text link, banner, coupons. Disallowed: social media, Facebook ads, search ads (SEM), deals, native/pop ads, HTML email.",
+          "notes": "Brand bidding / PPC / Meta ads strictly prohibited. Only Cuelinks-supplied or site-listed coupons are paid."
+        },
+        "agoda": {
+          "source": "https://www.cuelinks.com/campaigns/agoda-affiliate-program",
+          "name": "Agoda",
+          "deeplink": "No (Important information: 'Deeplinking - Forbidden')",
+          "cookie": "1 day",
+          "tracking": "5 minutes",
+          "validation": "60 days",
+          "payment": "90 days after validation",
+          "payoutShown": "Upto 5.40% per sale",
+          "media": "Conflicting on the page: the media list allows text links, but 'Important information' says 'Text Link - Forbidden'. Banners and social media allowed; cashback forbidden.",
+          "notes": "Agoda's own direct programme (partners.agoda.com) is separate; its deep-link support is unconfirmed."
+        },
+        "oyo": {
+          "source": "https://www.cuelinks.com/campaigns/oyo-rooms-affiliate-program",
+          "name": "Oyo Rooms",
+          "deeplink": "not stated",
+          "notes": "Main campaign shows 'This Campaign has been paused by the advertiser' (22 Nov 2026)."
+        }
+      }
+    },
+    "bookingcom": { "status": "Not joined. Joins via CJ Affiliate (phase 2). Deep-link support to confirm at signup." },
+    "agodaDirect": { "status": "Not joined. Agoda Partners direct programme; area deep links unconfirmed (an older help article says text links land on the city page)." }
+  },
+  "cityFallback": {
+    "bookingcom": { "url": "https://www.booking.com/city/in/ujjain.html", "title": "10 Best Ujjain Hotels, India", "evidence": "opened" },
+    "agoda": { "url": "https://www.agoda.com/en-in/city/ujjain-in.html", "title": "Top Hotels in Ujjain", "evidence": "search + exists" },
+    "goibibo": { "url": "https://www.goibibo.com/hotels/hotels-in-ujjain-ct/", "title": "Hotels in Ujjain", "evidence": "search + openseo" },
+    "makemytrip": { "url": "https://www.makemytrip.com/hotels/ujjain-hotels.html", "title": "Hotels in Ujjain", "evidence": "openseo (Google #1 for 'makemytrip hotels in ujjain')" }
+  },
+  "areas": {
+    "near-mahakal-temple": {
+      "subid": "area-near-mahakal-temple",
+      "links": {
+        "bookingcom": { "url": "https://www.booking.com/landmark/in/mahakaleshwar-jyotirlinga.html", "title": "The 10 best hotels near Mahakaleshwar Jyotirlinga in Ujjain, India", "match": "landmark", "evidence": "opened" },
+        "agoda": { "url": "https://www.agoda.com/en-in/hotels-near-mahakaleshwar-temple/attractions/ujjain-in.html", "title": "Hotels near Mahakaleshwar Temple, Ujjain", "match": "landmark", "evidence": "search + exists" },
+        "makemytrip": { "url": "https://www.makemytrip.com/hotels/ujjain-hotels-near-mahakal_lok.html", "title": "Hotels Near Mahakal Lok, Ujjain", "match": "landmark (Mahakal Lok corridor)", "evidence": "search" },
+        "goibibo": { "url": "https://www.goibibo.com/hotels/budget-hotels-near-mahakal-temple_ujjain-lc/", "title": "Budget Hotels near Mahakal Temple Ujjain", "match": "landmark, budget filter only (no general page found)", "evidence": "search" }
+      }
+    },
+    "near-ram-ghat": {
+      "subid": "area-near-ram-ghat",
+      "links": {
+        "makemytrip": { "url": "https://www.makemytrip.com/hotels/ujjain-hotels-near-ram_ghat.html", "title": "Hotels in Ujjain - Hotels Near Ram Ghat", "match": "landmark", "evidence": "openseo (Google #1 for 'makemytrip hotels near ram ghat ujjain')" },
+        "goibibo": { "url": "https://www.goibibo.com/hotels/hotels-in-ujjain/near-ram-ghat-lh/", "title": "Hotels near Ram Ghat Ujjain", "match": "landmark", "evidence": "search" },
+        "bookingcom": { "url": null, "match": "none — use cityFallback", "evidence": "checked: /landmark/in/ram-ghat.html and ram-ghat-ujjain.html return 404" },
+        "agoda": { "url": null, "match": "none — use cityFallback", "evidence": "checked: /en-in/hotels-near-ram-ghat/attractions/ujjain-in.html returns 404" }
+      }
+    },
+    "near-railway-station": {
+      "subid": "area-near-railway-station",
+      "links": {
+        "bookingcom": { "url": "https://www.booking.com/landmark/in/ujjain-junction-station.html", "title": "The 10 best hotels near Ujjain Junction Station in Ujjain, India", "match": "landmark", "evidence": "opened" },
+        "agoda": { "url": "https://www.agoda.com/en-in/hotels-near-ujjain-railway-station/attractions/ujjain-in.html", "title": "Hotels near Ujjain Railway Station, Ujjain", "match": "landmark", "evidence": "search + exists" },
+        "goibibo": { "url": "https://www.goibibo.com/hotels/hotels-in-ujjain/near-ujjain-junction-railway-station-lh/", "title": "Hotels near Ujjain Junction Railway Station Ujjain", "match": "landmark", "evidence": "search" },
+        "makemytrip": { "url": null, "match": "none on the Indian site (only international makemytrip.global pages and a 5-star-only page) — use cityFallback", "evidence": "search + openseo" }
+      }
+    },
+    "freeganj": {
+      "subid": "area-freeganj",
+      "links": {
+        "goibibo": { "url": "https://www.goibibo.com/hotels/hotels-in-ujjain/near-free-ganj-lh/", "title": "Hotels near Free Ganj Ujjain", "match": "area", "evidence": "search" },
+        "makemytrip": { "url": null, "match": "none (only a 5-star-only page) — use cityFallback", "evidence": "search" },
+        "agoda": { "url": null, "match": "none — use cityFallback", "evidence": "checked: /en-in/freeganj/maps/ujjain-in.html returns 404" },
+        "bookingcom": { "url": null, "match": "none found — use cityFallback", "evidence": "search" }
+      }
+    },
+    "nanakheda": {
+      "subid": "area-nanakheda",
+      "links": {
+        "makemytrip": { "url": "https://www.makemytrip.com/hotels/hotels-in-nanakheda-ujjain.html", "title": "Hotels in Nanakheda, Ujjain", "match": "area", "evidence": "search" },
+        "agoda": { "url": "https://www.agoda.com/en-in/nanakheda/maps/ujjain-in.html", "title": "Best Hotels in Nanakheda, Ujjain (Google also shows it as 'Mahakal Vanijya')", "match": "area", "evidence": "search + openseo + exists" },
+        "goibibo": { "url": "https://www.goibibo.com/hotels/budget-hotels-near-nana-kheda-bus-stand_ujjain-lc/", "title": "Budget Hotels near Nana Kheda Bus Stand Ujjain", "match": "bus stand, budget filter only (no general page found)", "evidence": "search" },
+        "bookingcom": { "url": null, "match": "none found — use cityFallback", "evidence": "search" }
+      }
+    },
+    "dewas-road": {
+      "subid": "area-dewas-road",
+      "links": {
+        "goibibo": { "url": "https://www.goibibo.com/hotels/hotels-in-ujjain/dewas-road-ah/", "title": "Hotels in Dewas Road Ujjain", "match": "area", "evidence": "search" },
+        "makemytrip": { "url": "https://www.makemytrip.com/hotels/hotels-in-dewas_road-ujjain.html", "title": "Hotels in Dewas Road, Ujjain", "match": "area (page listed very few properties when checked)", "evidence": "openseo" },
+        "agoda": { "url": null, "match": "none found — use cityFallback", "evidence": "search" },
+        "bookingcom": { "url": null, "match": "none found — use cityFallback", "evidence": "search" }
+      }
+    }
+  },
+  "categories": {
+    "all": {
+      "subid": "cat-all",
+      "note": "For /hotels/ (the 'Hotels in Ujjain' hub): use each partner's cityFallback."
+    },
+    "budget": {
+      "subid": "cat-budget",
+      "links": {
+        "bookingcom": { "url": "https://www.booking.com/budget/city/in/ujjain.html", "title": "The 10 best cheap hotels in Ujjain, India", "match": "category", "evidence": "opened" },
+        "agoda": { "url": "https://www.agoda.com/en-in/theme/cheap-hotels/city/ujjain-in.html", "title": "Best Budget Hotels in Ujjain", "match": "category", "evidence": "search + exists" }
+      }
+    },
+    "family": {
+      "subid": "cat-family",
+      "links": {
+        "bookingcom": { "url": "https://www.booking.com/family/city/in/ujjain.html", "title": "The 10 best family hotels in Ujjain, India", "match": "category", "evidence": "opened" }
+      }
+    },
+    "premium": {
+      "subid": "cat-premium",
+      "links": {
+        "bookingcom": { "url": "https://www.booking.com/luxury/city/in/ujjain.html", "title": "The 10 best luxury hotels in Ujjain, India", "match": "category (also /fourstars/city/in/ujjain.html, opened)", "evidence": "opened" }
+      }
+    }
+  },
+  "laterOptions": [
+    "OYO area pages (e.g. https://www.oyorooms.com/hotels-in-ram-ghat-ujjain/) — Cuelinks OYO campaign paused on 22 Nov 2026",
+    "Cleartrip and EaseMyTrip have Dewas Road pages — not researched further"
+  ]
+}

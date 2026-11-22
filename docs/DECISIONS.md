@@ -58,6 +58,8 @@ Many visitors, and your existing About page, are Hindi-first.
 
 ### 11. Affiliate programmes: plan ready → `docs/AFFILIATE-PLAN.md`
 **Recommended:** phase 1 = MakeMyTrip + Goibibo through one Indian network (Cuelinks or vCommission; flat ₹ per booking, INR payouts), plus **Agoda Partners** once real area pages are live. Booking.com (via CJ), OYO and Expedia later. Decisions listed in the plan §8.
+- ✅ **Joined Cuelinks (22 Nov 2026).** Area booking links researched → `docs/AFFILIATE-LINKS.md`.
+- ⚠️ Cuelinks' campaign pages say **"Deeplink: No"** for MakeMyTrip Hotels, Goibibo and Agoda. **Pending:** check in your dashboard or with Cuelinks support whether links to area pages (e.g. "near Ram Ghat") are paid, and send me one generated test link.
 
 ### 12. Paid listings and advertising
 - Pricing model for **featured listings** (monthly or seasonal), and whether hotels can also pay for leads.
