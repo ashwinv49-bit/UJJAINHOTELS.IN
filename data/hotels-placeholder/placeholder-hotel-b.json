@@ -1,0 +1,44 @@
+{
+  "slug": "placeholder-hotel-b",
+  "name": "PLACEHOLDER Hotel B (not a real hotel)",
+  "status": "verified",
+  "placeholder": true,
+  "propertyType": "hotel",
+  "summary": "PLACEHOLDER record used to test the hotel profile layout. Not a real hotel. It never appears on the live website.",
+  "address": {
+    "street": "PLACEHOLDER ADDRESS",
+    "locality": "Placeholder locality",
+    "postalCode": "456000"
+  },
+  "contact": {
+    "phone": "+910000000000",
+    "whatsapp": "+910000000000"
+  },
+  "photos": [],
+  "affiliateLinks": [],
+  "listing": {
+    "tier": "free"
+  },
+  "area": "near-railway-station",
+  "priceBand": "mid",
+  "suitableFor": [],
+  "facilities": [
+    "ac",
+    "wifi",
+    "parking",
+    "lift"
+  ],
+  "verification": {
+    "lastVerified": "2026-11-21",
+    "method": "phone-call",
+    "verifiedBy": "PLACEHOLDER (not a real verification)",
+    "notes": "Test data only."
+  },
+  "history": [
+    {
+      "date": "2026-11-21",
+      "status": "verified",
+      "note": "Placeholder record for local design and testing."
+    }
+  ]
+}

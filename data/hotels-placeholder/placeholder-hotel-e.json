@@ -1,0 +1,35 @@
+{
+  "slug": "placeholder-hotel-e",
+  "name": "PLACEHOLDER Hotel E (not a real hotel)",
+  "status": "contacted",
+  "placeholder": true,
+  "propertyType": "hotel",
+  "summary": "PLACEHOLDER record used to test the hotel profile layout. Not a real hotel. It never appears on the live website.",
+  "address": {
+    "street": "PLACEHOLDER ADDRESS",
+    "locality": "Placeholder locality",
+    "postalCode": "456000"
+  },
+  "contact": {
+    "phone": "+910000000000",
+    "whatsapp": "+910000000000"
+  },
+  "photos": [],
+  "affiliateLinks": [],
+  "listing": {
+    "tier": "free"
+  },
+  "area": "freeganj",
+  "priceBand": "mid",
+  "facilities": [
+    "ac",
+    "wifi"
+  ],
+  "history": [
+    {
+      "date": "2026-11-21",
+      "status": "contacted",
+      "note": "Placeholder record for local design and testing."
+    }
+  ]
+}

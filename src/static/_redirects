@@ -1,0 +1,3 @@
+# Netlify redirects (processed before netlify.toml rules).
+# "Luxury Hotels" was renamed "Premium Hotels" (Task 02).
+/hotels/luxury/   /hotels/premium/   301

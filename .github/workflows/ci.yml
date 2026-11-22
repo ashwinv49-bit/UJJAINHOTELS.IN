@@ -17,7 +17,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Build (fails on template/SEO warnings)
+      - name: Hotel listing rules (unit tests)
+        run: node scripts/test-hotels.mjs
+      - name: Build (fails on template/SEO warnings or unpublishable verified listings)
         run: node scripts/build.mjs --strict
+      - name: Live-mode build (Netlify production rules; placeholders must not leak)
+        run: NETLIFY=true CONTEXT=production node scripts/build.mjs --strict
       - name: Static QA (links, assets, meta, headings, alt text, JSON-LD)
         run: node scripts/qa.mjs

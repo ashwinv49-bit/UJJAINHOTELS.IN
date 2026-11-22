@@ -15,7 +15,9 @@ Status as of 21 November 2026 (Task 01: foundation + homepage prototype).
 | Descriptive image alt text | ✅ / ⬜ | All rendered images have alt; photo alt text to be checked once photos are added (`altVerified`) |
 | `lang="en-IN"`, viewport, theme-color, manifest, favicons | ✅ | |
 | Internal linking (categories, areas, guides, footer) | ✅ | 0 broken internal links (QA) |
-| Breadcrumbs | ✅ (visual) | `BreadcrumbList` schema to add with the real inner pages |
+| Breadcrumbs | ✅ | Visual + `BreadcrumbList` schema on hotel profiles and collection pages |
+| Hotel profiles `/hotels/<slug>/` | ✅ | Unique title, description, canonical, OG image (first photo); verified listings only |
+| Collection pages (categories, areas, `/hotels/`) | ✅ | `noindex` while they list no verified real hotel (thin content); indexable once they do |
 | Hindi / bilingual pages (`hreflang`) | ⬜ | Decision 9 |
 
 ## Indexing controls
@@ -33,10 +35,10 @@ Status as of 21 November 2026 (Task 01: foundation + homepage prototype).
 | Item | Status | Notes |
 |---|---|---|
 | `WebSite` + `Organization` (name, URL, logo) | ✅ | Homepage only; verifiable facts only |
-| `Hotel` / `LodgingBusiness` | ⬜ | Only for real, verified listings |
+| `Hotel` | ✅ ready | Emitted only for real, verified listings, with facts from the record only (address, phone, geo, confirmed facilities, photos). Never ratings, reviews or prices |
 | `Review` / `AggregateRating` | ❌ deliberately not used | We never show invented ratings or reviews, and self-serving review markup isn't eligible |
 | `Article` for guides | ⬜ | With real guides |
-| `BreadcrumbList` | ⬜ | With inner pages |
+| `BreadcrumbList` | ✅ | Hotel profiles and collection pages |
 
 ## Performance (Lighthouse 12, mobile emulation, local build)
 

@@ -1,0 +1,51 @@
+{
+  "slug": "placeholder-hotel-a",
+  "name": "PLACEHOLDER Hotel A (not a real hotel)",
+  "status": "verified",
+  "placeholder": true,
+  "propertyType": "hotel",
+  "summary": "PLACEHOLDER record used to test the hotel profile layout. Not a real hotel. It never appears on the live website.",
+  "address": {
+    "street": "PLACEHOLDER ADDRESS",
+    "locality": "Placeholder locality",
+    "postalCode": "456000"
+  },
+  "contact": {
+    "phone": "+910000000000",
+    "whatsapp": "+910000000000"
+  },
+  "photos": [],
+  "affiliateLinks": [
+    {
+      "partner": "agoda",
+      "url": "https://www.agoda.com/placeholder-not-a-real-link"
+    }
+  ],
+  "listing": {
+    "tier": "featured"
+  },
+  "area": "near-mahakal-temple",
+  "priceBand": "budget",
+  "suitableFor": [
+    "family"
+  ],
+  "facilities": [
+    "ac",
+    "hot-water",
+    "24h-desk",
+    "family-rooms"
+  ],
+  "verification": {
+    "lastVerified": "2026-11-21",
+    "method": "phone-call",
+    "verifiedBy": "PLACEHOLDER (not a real verification)",
+    "notes": "Test data only."
+  },
+  "history": [
+    {
+      "date": "2026-11-21",
+      "status": "verified",
+      "note": "Placeholder record for local design and testing."
+    }
+  ]
+}

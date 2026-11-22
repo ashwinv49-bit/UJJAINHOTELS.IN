@@ -2,88 +2,98 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://hotelsujjain.in/schema/hotel.schema.json",
   "title": "Hotel listing",
-  "description": "Data contract for one hotel listing on HotelsUjjain.in. Every factual field must be verified from a named source before publishing. Do not publish a listing that has no verification record.",
+  "description": "Data contract for one hotel record in data/hotels/<slug>.json. Enforced by scripts/lib/hotels.mjs (validateHotel). Only records with status 'verified' AND a complete verification block are ever published. Never invent any value: leave a field out rather than guess.",
   "type": "object",
-  "required": ["slug", "name", "area", "categories", "address", "listing", "verification"],
+  "required": ["slug", "name", "status"],
   "additionalProperties": false,
   "properties": {
     "slug": {
       "type": "string",
       "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
-      "description": "URL slug. The page is published at /hotels/<slug>/. Must not clash with collection slugs (areas, stay types)."
+      "description": "URL slug: the profile is published at /hotels/<slug>/. Must not clash with a category or area slug."
     },
-    "name": { "type": "string", "description": "Exact trading name as shown on the property / registration." },
-    "area": { "type": "string", "description": "Slug from data/areas.json." },
-    "categories": {
-      "type": "array",
-      "items": { "enum": ["budget", "family", "luxury", "near-mahakal-temple", "near-railway-station"] },
-      "minItems": 1
+    "name": { "type": "string", "description": "Exact trading name as shown on the property." },
+    "status": {
+      "enum": ["draft", "contacted", "verified"],
+      "description": "draft = being researched (private). contacted = property contacted, details not yet confirmed (private). verified = every published field confirmed with the property (public)."
     },
+    "placeholder": {
+      "type": "boolean",
+      "description": "true ONLY for the design/test records in data/hotels-placeholder/. Placeholder records never appear on any Netlify URL."
+    },
+    "area": { "type": "string", "description": "Area slug from data/areas.json." },
     "propertyType": { "enum": ["hotel", "resort", "guest-house", "homestay", "dharamshala", "lodge"] },
-    "summary": { "type": "string", "maxLength": 300, "description": "Short factual description written by us, not copied from another site." },
+    "priceBand": {
+      "enum": ["budget", "mid", "premium"],
+      "description": "Broad band agreed with the property. Never a price: the site never shows prices or availability."
+    },
+    "suitableFor": {
+      "type": "array",
+      "items": { "enum": ["family"] },
+      "description": "Audience tags confirmed with the property (e.g. family rooms or extra beds available)."
+    },
+    "facilities": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Slugs from data/facilities.json. Only facilities confirmed by the property in writing/by phone or seen in person."
+    },
+    "summary": { "type": "string", "maxLength": 300, "description": "Short factual description written by us. Never copied from another website." },
     "address": {
       "type": "object",
       "required": ["street", "locality", "postalCode"],
       "properties": {
         "street": { "type": "string" },
         "locality": { "type": "string" },
-        "city": { "const": "Ujjain" },
-        "region": { "const": "Madhya Pradesh" },
         "postalCode": { "type": "string", "pattern": "^4560[0-9]{2}$" }
       }
     },
     "geo": {
       "type": "object",
+      "required": ["lat", "lng"],
       "properties": { "lat": { "type": "number" }, "lng": { "type": "number" } },
-      "description": "Coordinates taken from the property's verified map pin."
+      "description": "Coordinates of the property's verified map pin (used for directions)."
     },
+    "googlePlaceId": { "type": "string", "description": "Optional Google Maps place ID of the property (improves the directions link)." },
     "distances": {
       "type": "object",
-      "description": "Road or walking distances in km, measured by us with a map tool. Record the method.",
+      "description": "Distances in km measured by us with a map tool. Omit anything not measured.",
       "properties": {
         "mahakalTempleKm": { "type": "number" },
         "ramGhatKm": { "type": "number" },
         "railwayStationKm": { "type": "number" },
-        "method": { "type": "string" }
+        "method": { "type": "string", "description": "e.g. 'Road distance, Google Maps, 21 Nov 2026'" }
       }
     },
-    "priceBand": {
-      "enum": ["budget", "mid", "premium"],
-      "description": "Broad band only. We never show live prices or availability."
-    },
-    "amenities": {
-      "type": "array",
-      "items": { "type": "string" },
-      "description": "Only amenities confirmed by the property in writing or seen in person."
+    "contact": {
+      "type": "object",
+      "properties": {
+        "phone": { "type": "string", "pattern": "^\\+91[6-9][0-9]{9}$", "description": "Number confirmed by calling it." },
+        "whatsapp": { "type": "string", "pattern": "^\\+91[6-9][0-9]{9}$", "description": "The hotel's own WhatsApp number (enquiry button target)." },
+        "website": { "type": "string", "format": "uri" }
+      }
     },
     "photos": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["src", "alt", "rights"],
+        "required": ["src", "width", "height", "alt", "rights"],
         "properties": {
-          "src": { "type": "string" },
+          "src": { "type": "string", "description": "Root-relative path, e.g. /assets/images/hotels/<slug>/front.jpg" },
+          "width": { "type": "integer" },
+          "height": { "type": "integer" },
           "alt": { "type": "string" },
           "rights": {
             "enum": ["own-photo", "supplied-by-property-with-permission", "licensed"],
             "description": "Never use photos copied from OTAs, Google Maps or other websites."
           },
           "credit": { "type": "string" },
-          "permissionRef": { "type": "string", "description": "Where the written permission is stored." }
+          "permissionRef": { "type": "string", "description": "Required for supplied/licensed photos: where the written permission is kept." }
         }
-      }
-    },
-    "contact": {
-      "type": "object",
-      "properties": {
-        "whatsapp": { "type": "string", "pattern": "^91[0-9]{10}$" },
-        "phone": { "type": "string" },
-        "website": { "type": "string", "format": "uri" }
       }
     },
     "affiliateLinks": {
       "type": "array",
-      "description": "Rendered with rel=\"sponsored noopener\" and a visible disclosure.",
+      "description": "Shown only if the partner is enabled in data/affiliates.json and the link host is allowed.",
       "items": {
         "type": "object",
         "required": ["partner", "url"],
@@ -92,20 +102,27 @@
     },
     "listing": {
       "type": "object",
-      "required": ["tier"],
       "properties": {
-        "tier": { "enum": ["free", "featured"], "description": "Featured = paid placement, always labelled on the page." },
+        "tier": { "enum": ["free", "featured"], "description": "featured = paid placement, always labelled 'Featured · Paid'." },
         "featuredUntil": { "type": "string", "format": "date" }
       }
     },
     "verification": {
       "type": "object",
-      "required": ["lastVerified", "method"],
+      "required": ["lastVerified", "method", "verifiedBy"],
       "properties": {
-        "lastVerified": { "type": "string", "format": "date" },
-        "method": { "enum": ["site-visit", "phone-call", "owner-submitted-and-confirmed"] },
+        "lastVerified": { "type": "string", "format": "date", "description": "Date (YYYY-MM-DD) every published field was last confirmed. Only change it after re-checking." },
+        "method": { "enum": ["phone-call", "site-visit", "owner-submitted-and-confirmed"] },
         "verifiedBy": { "type": "string" },
         "notes": { "type": "string" }
+      }
+    },
+    "history": {
+      "type": "array",
+      "description": "Private notes on the listing's progress (never published).",
+      "items": {
+        "type": "object",
+        "properties": { "date": { "type": "string", "format": "date" }, "status": { "type": "string" }, "note": { "type": "string" } }
       }
     }
   }

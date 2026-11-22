@@ -31,6 +31,7 @@ Read this before doing any work in this repository. These are the owner's standi
 ## How we work
 - **Plan before push (owner's rule):** before anything goes live, write a plan and get the owner's approval. Then share the Netlify **Deploy Preview** link and screenshots, and publish to `main` **only after the owner says "go"**.
 - **Development branch:** commit on the working branch, then open a **pull request into `main`** when the owner asks. **`main` is production**: every push to it deploys live via Netlify.
+- **Hotel listings:** one JSON file per hotel in `data/hotels/`. Statuses `draft` → `contacted` → `verified`. **Only verified records with a complete verification block are published** (rules in `scripts/lib/hotels.mjs`; guide in `docs/HOTELS.md`). Never change `lastVerified` without re-checking with the property. Run `npm run hotels` to see what's public.
 - **Sample content never goes public:** sample hotels render only in local design builds. Every Netlify build (live site and Deploy Previews) hides them (`site.showSamples`, set in `scripts/build.mjs`), and the build fails if sample markup leaks.
 - **Before every hand-off:** `npm run qa` (strict build + static QA) and `node scripts/qa-browser.cjs` (layouts, console errors, accessibility).
 - **Pre-launch safety:** `data/site.json → "indexing": false` and `"prototype": true` until the owner approves launch. Non-production Netlify builds are always `noindex`.

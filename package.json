@@ -12,6 +12,9 @@
     "build:strict": "node scripts/build.mjs --strict",
     "serve": "node scripts/serve.mjs",
     "dev": "node scripts/build.mjs && node scripts/serve.mjs",
-    "qa": "node scripts/build.mjs --strict && node scripts/qa.mjs"
+    "qa": "node scripts/test-hotels.mjs && node scripts/build.mjs --strict && node scripts/qa.mjs",
+    "test:hotels": "node scripts/test-hotels.mjs",
+    "hotels": "node scripts/hotels-report.mjs",
+    "new-hotel": "node scripts/new-hotel.mjs"
   }
 }

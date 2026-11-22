@@ -14,7 +14,9 @@ Requirements: **Node 18+** (no npm packages needed). Python 3 + Pillow only for 
 ```bash
 npm run dev          # build into dist/ and serve at http://localhost:4173
 npm run build        # build only
-npm run qa           # strict build + static QA (links, meta, headings, alt text, JSON-LD)
+npm run qa           # hotel rule tests + strict build + static QA (links, meta, headings, alt text, JSON-LD)
+npm run hotels       # hotel database report: status, live yes/no, last verified, what to fix
+npm run new-hotel -- "Exact Hotel Name" --area near-mahakal-temple   # new draft record
 node scripts/qa-browser.cjs    # Playwright: layouts, console errors, nav, search, a11y (optional)
 ```
 
@@ -117,3 +119,4 @@ Never invent hotel names, prices, ratings, amenities, availability or reviews. S
 - [SEO & technical checklist](docs/SEO-CHECKLIST.md)
 - [Decisions needed](docs/DECISIONS.md)
 - [Affiliate business model](docs/AFFILIATE-PLAN.md)
+- [Hotel listings: add, update, publish](docs/HOTELS.md)

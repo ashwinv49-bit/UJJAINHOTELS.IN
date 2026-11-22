@@ -1,0 +1,17 @@
+{
+  "slug": "exact-hotel-name",
+  "name": "Exact Hotel Name",
+  "status": "draft",
+  "area": "near-mahakal-temple",
+  "propertyType": "hotel",
+  "priceBand": "budget",
+  "suitableFor": [],
+  "facilities": [],
+  "summary": "",
+  "address": { "street": "", "locality": "", "postalCode": "4560" },
+  "contact": { "phone": "", "whatsapp": "" },
+  "photos": [],
+  "affiliateLinks": [],
+  "listing": { "tier": "free" },
+  "history": [{ "date": "YYYY-MM-DD", "status": "draft", "note": "Record created" }]
+}
