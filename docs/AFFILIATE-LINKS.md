@@ -2,7 +2,34 @@
 
 **Checked:** 22 November 2026 · **Data:** `data/affiliate-areas.json` · **Website:** not changed (all partners still switched off)
 
-## The short version
+## 0. Update 25 Nov 2026: where deep links work
+
+A deep link goes straight to an area page (e.g. "Hotels near Ram Ghat"). This table comes from each network's or partner's own pages, found via search. **Confirm in each dashboard.**
+
+| Booking site | Deep links ✅ via | Terms shown | Not via |
+|---|---|---|---|
+| **Goibibo** | **EarnKaro** | ₹120 per booking above ₹1,000 · 30-day cookie · web only | Cuelinks |
+| **MakeMyTrip** | **INRDeals** ("MakeMyTrip (Domestic Hotels)") | up to ₹180 · 30-day cookie · no app traffic | Cuelinks, EarnKaro (vCommission unclear) |
+| Cleartrip | EarnKaro | up to 4.5% hotels | — |
+| EaseMyTrip | EarnKaro | 3.4% | — |
+| Trip.com | Direct programme ("Custom Link", any page) | 30-day cookie | — |
+| Expedia / Hotels.com | Travel Creator (any page) | 7-day cookie | — |
+| Agoda | unclear: Agoda Partners text links go to the city or a hotel | ~4–5% | Cuelinks, EarnKaro |
+| Booking.com | unclear: now only via CJ (Booking approves) | — | — |
+
+**Plan:**
+1. EarnKaro → Goibibo for Ram Ghat, Station, Freeganj and Dewas Road.
+2. INRDeals → MakeMyTrip for Ram Ghat, Mahakal Lok, Nanakheda and Dewas Road.
+3. Agoda, Booking.com and Trip.com later, once the site has real content.
+
+**How the website uses your links:**
+1. Paste the tracking link into `trackedUrl` for that area in `data/affiliate-areas.json`.
+2. Add the network's link domain to that partner's `hosts` in `data/affiliates.json`.
+3. Switch the partner on.
+
+The site then shows a labelled "Check prices on Goibibo ↗ · Partner link" button on that area's page. Each change gets a preview and your "go" first.
+
+## The short version (22 Nov)
 1. **Every area has a matching page on at least one booking site.** Example: MakeMyTrip and Goibibo both have a "Hotels near Ram Ghat" page.
 2. **⚠️ Cuelinks says "Deeplink: No"** for MakeMyTrip Hotels, Goibibo and Agoda (read directly on Cuelinks' campaign pages, 22 Nov 2026). This means Cuelinks may **only pay for links to the partner's main page**, not to an area page like "near Ram Ghat".
 3. **Please check this in your Cuelinks dashboard** (or ask Cuelinks support, message below) before we build any buttons.
@@ -82,6 +109,25 @@ Each area also has a **sub-ID** ready (e.g. `area-near-ram-ghat`). Cuelinks allo
 - Your real payout rates (visible after login).
 - Whether Agoda's or Booking.com's direct programmes allow area links (confirm at signup).
 - Whether MakeMyTrip, Goibibo and Agoda pages open correctly for you (they block our checks).
+
+## 6. Digital PDF products: research (25 Nov 2026, decision pending)
+
+- **Demand:** a 50-page "Bhasma Aarti booking guide" PDF is already sold on Topmate, and many free blog guides exist. A paid guide must be clearly better: accurate, dated, from official sources.
+- **Product ideas** (original; facts only from official sources such as the temple portal and MP Tourism, dated, checked by you):
+  1. Mahakal darshan & Bhasma Aarti planner.
+  2. Ujjain 1–2 day itinerary + where to stay by area.
+  3. Simhastha 2028 stay planner, only once official arrangements are published.
+- **Where to sell.** We never process payments ourselves; the site links to a hosted checkout. Fees are as reported by third-party comparisons; check the pricing pages.
+
+| Platform | Reported fee | UPI | Note |
+|---|---|---|---|
+| **Topmate** | ~7–10% + GST | ✅ | No monthly fee; instant download |
+| **Instamojo** | 2%+₹3 to 10%+₹3 by plan | ✅ | Payment links |
+| Razorpay Payment Pages | 2% + GST | ✅ | PDF auto-delivery unconfirmed |
+| Payhip | 5% (free plan) | — | Foreign buyers |
+| Gumroad | 10% + $0.50 | — | Costly for ₹ prices |
+
+- **Tax:** ask a CA about GST and income tax on digital sales.
 
 ## Sources (22 Nov 2026)
 - Cuelinks campaign pages: [MakeMyTrip (Hotels)](https://www.cuelinks.com/campaigns/makemytrip-homestays-affiliate-program) · [Goibibo](https://www.cuelinks.com/campaigns/goibibo-affiliate-program) · [Agoda](https://www.cuelinks.com/campaigns/agoda-affiliate-program) · [OYO](https://www.cuelinks.com/campaigns/oyo-rooms-affiliate-program)

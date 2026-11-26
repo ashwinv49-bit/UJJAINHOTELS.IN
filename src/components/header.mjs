@@ -1,10 +1,10 @@
-import { esc, icon, brandMark, whatsappHref, whatsappRel } from './_lib.mjs';
+import { esc, icon, brandMark } from './_lib.mjs';
 
 const NAV = [
   { label: 'Hotels', href: '/hotels/' },
   { label: 'Areas', href: '/#areas' },
   { label: 'Travel guides', href: '/guides/' },
-  { label: 'List your hotel', href: '/list-your-hotel/' },
+  { label: 'For hotel owners', href: '/list-your-hotel/' },
   { label: 'About', href: '/about/' },
 ];
 
@@ -26,7 +26,7 @@ export default function header({ site, page }) {
     </button>
     <nav class="site-nav" id="site-nav" aria-label="Main" data-open="false">
       <ul class="site-nav__list" role="list">${items}</ul>
-      <a class="btn btn--whatsapp btn--sm site-nav__cta" href="${whatsappHref(site)}"${whatsappRel(site)}>${icon('whatsapp')}WhatsApp enquiry</a>
+      <a class="btn btn--primary btn--sm site-nav__cta" href="/hotels/">${icon('search')}Find hotels</a>
     </nav>
   </div>
 </header>`;

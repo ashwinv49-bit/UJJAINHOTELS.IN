@@ -32,7 +32,7 @@ export default function searchForm({ data }) {
     </div>
     <button class="btn btn--dark search-form__submit" type="submit">${icon('search')}Find stays</button>
   </form>
-  <p class="search-panel__note">${icon('info')}<span>We help you discover and compare places to stay. Prices and availability are always confirmed directly with the hotel or booking partner.</span></p>
+  <p class="search-panel__note">${icon('info')}<span>We help you choose where to stay. Prices and availability are always shown on the booking partner’s site.</span></p>
 </div>
 <nav class="quick-links" aria-label="Popular searches"><span class="quick-links__label">Popular:</span>${quick}</nav>`;
 }

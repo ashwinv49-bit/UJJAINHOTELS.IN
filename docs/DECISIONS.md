@@ -44,6 +44,7 @@ The six areas (Mahakal Temple area, Ram Ghat & Shipra riverfront, Railway Statio
 ## B. Needed before launch
 
 ### 8. Contact and enquiry routing
+- ⏸ **Traveller WhatsApp enquiries paused (25 Nov 2026, #21).** Your WhatsApp number is now needed only for the **hotel-owner registration** button.
 - WhatsApp **business number** and contact email (`data/site.json → contact`).
 - **Recommended:** route all enquiries to your number at first, so you can help travellers and measure demand. Add hotels' own numbers later, for paid featured listings.
 
@@ -60,13 +61,16 @@ Many visitors, and your existing About page, are Hindi-first.
 **Recommended:** phase 1 = MakeMyTrip + Goibibo through one Indian network (Cuelinks or vCommission; flat ₹ per booking, INR payouts), plus **Agoda Partners** once real area pages are live. Booking.com (via CJ), OYO and Expedia later. Decisions listed in the plan §8.
 - ✅ **Joined Cuelinks (22 Nov 2026).** Area booking links researched → `docs/AFFILIATE-LINKS.md`.
 - ⚠️ Cuelinks' campaign pages say **"Deeplink: No"** for MakeMyTrip Hotels, Goibibo and Agoda. **Pending:** check in your dashboard or with Cuelinks support whether links to area pages (e.g. "near Ram Ghat") are paid, and send me one generated test link.
+- **25 Nov:** trying **EarnKaro** (Goibibo deep links: Yes) and **INRDeals** (MakeMyTrip Domestic Hotels deep links: Yes). Full table → `docs/AFFILIATE-LINKS.md` §0.
 
 ### 12. Paid listings and advertising
+⏸ **Paused (25 Nov 2026, #21).** Revisit when hotel listings restart.
 - Pricing model for **featured listings** (monthly or seasonal), and whether hotels can also pay for leads.
 - Confirm the on-page label **"Featured · Paid"** (my recommendation: keep "Paid" visible; it builds trust).
 
 ### 13. Verification promise
-The homepage says every listing *will show where its details came from and when they were last checked*. The hotel schema supports this (`verification.lastVerified`, `method`). **Confirm you're happy to operate this process**, or I'll soften the wording.
+⏸ **Paused with hotel listings (25 Nov 2026, #21).** The homepage no longer makes this promise.
+Previously: the homepage said every listing *will show where its details came from and when they were last checked*. The hotel schema supports this (`verification.lastVerified`, `method`). **Confirm you're happy to operate this process**, or I'll soften the wording.
 
 ### 14. Legal pages
 Privacy policy (DPDP Act 2023), terms of use and the final affiliate disclosure. Need: legal owner or entity name and address. **Recommended:** have a lawyer review them before launch.
@@ -93,5 +97,19 @@ OpenSEO suggests flat addresses like `/hotels-in-ujjain/` and `/hotels-near-maha
 - **Recommended:** keep the current `/hotels/near-mahakal-temple/`-style addresses. They're built and tested, they already contain the keywords, and keywords in addresses matter little.
 - Nothing is indexed yet, so switching now would still be cheap if you prefer.
 
-### 20. Connect Search Console to OpenSEO
-OpenSEO reports your Search Console property is **not connected** to the OpenSEO project, so it can't see real search data. Connect it inside OpenSEO (your account; I can't do this from here).
+### 20. Connect Search Console to OpenSEO: ✅ done
+Connected (checked 23 Nov 2026). It shows 0 searches so far, as expected while the site is hidden from Google before launch.
+
+## D. Business model (25 Nov 2026)
+
+### 21. Affiliate-only phase: ✅ decided by you
+- **Now:** income is affiliate links only. Visitors choose an area here, then go to booking sites through labelled partner links.
+- **Hotel owners:** a "For hotel owners" page with a **Register on WhatsApp** button. Listings open later; registering is free and promises nothing.
+- **Paused** until you restart them: hotel listings, paid "Featured" placements, traveller WhatsApp enquiries, advertising (#8, #12, #13).
+- The hotel-listing code stays in place, dormant. It shows nothing until verified hotels are added again.
+- **Your to-dos:**
+  1. Send your WhatsApp business number (it will be public on the site).
+  2. Send tracked area links (EarnKaro → Goibibo; INRDeals → MakeMyTrip). Partner buttons switch on only with your tracked links.
+
+### 22. Digital PDF products: decision pending
+Research summary is in the plan of 25 Nov (also `docs/AFFILIATE-LINKS.md` §6). **Recommended first product:** a "Mahakal darshan & Bhasma Aarti planner" built only from official sources and checked by you, sold through a hosted checkout (Topmate or Instamojo; we never process payments ourselves). **You decide:** product, platform and price. Then I prepare a separate plan.

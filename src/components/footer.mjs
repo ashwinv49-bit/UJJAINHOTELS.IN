@@ -1,4 +1,4 @@
-import { esc, icon, brandMark, whatsappHref, whatsappRel } from './_lib.mjs';
+import { esc, brandMark } from './_lib.mjs';
 
 const list = (items) =>
   `<ul role="list">${items.map((i) => `<li><a href="${i.url}">${esc(i.label)}</a></li>`).join('')}</ul>`;
@@ -10,8 +10,7 @@ export default function footer({ site, data, year }) {
     { label: 'About us', url: '/about/' },
     { label: 'Contact', url: '/contact/' },
     { label: 'Travel guides', url: '/guides/' },
-    { label: 'List your hotel', url: '/list-your-hotel/' },
-    { label: 'Advertise with us', url: '/advertise/' },
+    { label: 'For hotel owners', url: '/list-your-hotel/' },
   ];
   const legal = [
     { label: 'Privacy policy', url: '/privacy-policy/' },
@@ -27,8 +26,7 @@ export default function footer({ site, data, year }) {
         ${brandMark('light')}
         <span class="brand__text"><span class="brand__name">${esc(site.brand)}</span><span class="brand__tagline">${esc(site.tagline)}</span></span>
       </a>
-      <p>A hotel discovery guide built only for Ujjain. We help you compare areas and types of stay, then contact hotels directly. We do not take bookings or payments.</p>
-      <a class="btn btn--whatsapp btn--sm" href="${whatsappHref(site)}"${whatsappRel(site)}>${icon('whatsapp')}Ask us on WhatsApp</a>
+      <p>A hotel discovery guide built only for Ujjain. We help you compare areas and types of stay, then check hotels on trusted booking sites. We do not take bookings or payments.</p>
     </div>
     <div class="footer-cols">
       <div class="footer-col"><h2>Hotels</h2>${list(hotels)}</div>
@@ -38,7 +36,7 @@ export default function footer({ site, data, year }) {
     </div>
   </div>
   <div class="container site-footer__disclosure">
-    <p><strong>Affiliate disclosure:</strong> some links on ${esc(site.domainLabel)} are affiliate links. If you book through them we may earn a commission, at no extra cost to you. Featured listings are paid placements and are always labelled. <a href="/affiliate-disclosure/">Read our full disclosure</a>.</p>
+    <p><strong>Affiliate disclosure:</strong> some links on ${esc(site.domainLabel)} are affiliate links. If you book through them we may earn a commission, at no extra cost to you. <a href="/affiliate-disclosure/">Read our full disclosure</a>.</p>
   </div>
   <div class="container site-footer__bottom">
     <p>© ${year} ${esc(site.domainLabel)}. All rights reserved.</p>

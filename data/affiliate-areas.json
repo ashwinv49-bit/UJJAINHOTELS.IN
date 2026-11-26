@@ -1,5 +1,5 @@
 {
-  "_readme": "Research data: each booking partner's own page for hotels in each Ujjain area. NOT used by the website yet — nothing reads this file, and every partner stays switched off in data/affiliates.json. Store only partner page links and short page titles; never hotel names, prices, ratings or distances. Evidence: 'opened' = we loaded the page and its title matches; 'exists' = the page loads (partner sends unknown addresses to its 404 page) but its content needs JavaScript; 'search' = found in web/Google search with a matching title, but the partner blocks automated checks, so the owner must test it on a phone; 'openseo' = seen in an OpenSEO Google results check (India, 22 Nov 2026). Report: docs/AFFILIATE-LINKS.md",
+  "_readme": "Each booking partner's own page for hotels in each Ujjain area. The website shows a partner button ONLY when `trackedUrl` holds the owner's tracking link (from an affiliate network such as EarnKaro or INRDeals) AND the partner is enabled in data/affiliates.json with that link's host listed in its `hosts` (checked by scripts/lib/partner-links.mjs). Untracked research URLs are never shown. Store only partner page links and short page titles; never hotel names, prices, ratings or distances. Evidence: 'opened' = we loaded the page and its title matches; 'exists' = the page loads (partner sends unknown addresses to its 404 page) but its content needs JavaScript; 'search' = found in web/Google search with a matching title, but the partner blocks automated checks, so the owner must test it on a phone; 'openseo' = seen in an OpenSEO Google results check (India, 22 Nov 2026). Report: docs/AFFILIATE-LINKS.md",
   "checked": "2026-11-22",
   "programmes": {
     "cuelinks": {
@@ -53,27 +53,38 @@
     "bookingcom": { "status": "Not joined. Joins via CJ Affiliate (phase 2). Deep-link support to confirm at signup." },
     "agodaDirect": { "status": "Not joined. Agoda Partners direct programme; area deep links unconfirmed (an older help article says text links land on the city page)." }
   },
+  "deepLinkNetworks": {
+    "_note": "Which affiliate network allows links straight to an area page (deep links), per each network's or partner's own pages found via search, 22-25 Nov 2026. Confirm in each dashboard before relying on it.",
+    "goibibo": { "yes": ["EarnKaro (₹120 per booking above ₹1,000; 30-day cookie; web/mobile web only)"], "no": ["Cuelinks"] },
+    "makemytrip": { "yes": ["INRDeals 'MakeMyTrip (Domestic Hotels)' (up to ₹180; 30-day cookie; web/mobile web, no app traffic)"], "no": ["Cuelinks", "EarnKaro"], "unclear": ["vCommission"] },
+    "agoda": { "yes": [], "no": ["Cuelinks (Deeplinking - Forbidden)", "EarnKaro"], "unclear": ["Agoda Partners direct (text links to city or hotel + tag)", "Travelpayouts (claims any page)"] },
+    "bookingcom": { "yes": [], "unclear": ["CJ (Booking.com approves; any-page links reported by third parties)"] },
+    "cleartrip": { "yes": ["EarnKaro (up to 4.5% hotels)"], "note": "Cleartrip Ujjain area pages not researched yet" },
+    "easemytrip": { "yes": ["EarnKaro (3.4%)"], "note": "EaseMyTrip has a Dewas Road page (seen in search)" },
+    "tripcom": { "yes": ["Trip.com direct programme 'Custom Link' (any Trip.com page; 30-day cookie)"] },
+    "expedia": { "yes": ["Expedia Travel Creator (any page incl. Hotels.com; 7-day cookie)"] }
+  },
   "cityFallback": {
-    "bookingcom": { "url": "https://www.booking.com/city/in/ujjain.html", "title": "10 Best Ujjain Hotels, India", "evidence": "opened" },
-    "agoda": { "url": "https://www.agoda.com/en-in/city/ujjain-in.html", "title": "Top Hotels in Ujjain", "evidence": "search + exists" },
-    "goibibo": { "url": "https://www.goibibo.com/hotels/hotels-in-ujjain-ct/", "title": "Hotels in Ujjain", "evidence": "search + openseo" },
-    "makemytrip": { "url": "https://www.makemytrip.com/hotels/ujjain-hotels.html", "title": "Hotels in Ujjain", "evidence": "openseo (Google #1 for 'makemytrip hotels in ujjain')" }
+    "bookingcom": { "url": "https://www.booking.com/city/in/ujjain.html", "title": "10 Best Ujjain Hotels, India", "evidence": "opened", "trackedUrl": "" },
+    "agoda": { "url": "https://www.agoda.com/en-in/city/ujjain-in.html", "title": "Top Hotels in Ujjain", "evidence": "search + exists", "trackedUrl": "" },
+    "goibibo": { "url": "https://www.goibibo.com/hotels/hotels-in-ujjain-ct/", "title": "Hotels in Ujjain", "evidence": "search + openseo", "trackedUrl": "" },
+    "makemytrip": { "url": "https://www.makemytrip.com/hotels/ujjain-hotels.html", "title": "Hotels in Ujjain", "evidence": "openseo (Google #1 for 'makemytrip hotels in ujjain')", "trackedUrl": "" }
   },
   "areas": {
     "near-mahakal-temple": {
       "subid": "area-near-mahakal-temple",
       "links": {
-        "bookingcom": { "url": "https://www.booking.com/landmark/in/mahakaleshwar-jyotirlinga.html", "title": "The 10 best hotels near Mahakaleshwar Jyotirlinga in Ujjain, India", "match": "landmark", "evidence": "opened" },
-        "agoda": { "url": "https://www.agoda.com/en-in/hotels-near-mahakaleshwar-temple/attractions/ujjain-in.html", "title": "Hotels near Mahakaleshwar Temple, Ujjain", "match": "landmark", "evidence": "search + exists" },
-        "makemytrip": { "url": "https://www.makemytrip.com/hotels/ujjain-hotels-near-mahakal_lok.html", "title": "Hotels Near Mahakal Lok, Ujjain", "match": "landmark (Mahakal Lok corridor)", "evidence": "search" },
-        "goibibo": { "url": "https://www.goibibo.com/hotels/budget-hotels-near-mahakal-temple_ujjain-lc/", "title": "Budget Hotels near Mahakal Temple Ujjain", "match": "landmark, budget filter only (no general page found)", "evidence": "search" }
+        "bookingcom": { "url": "https://www.booking.com/landmark/in/mahakaleshwar-jyotirlinga.html", "title": "The 10 best hotels near Mahakaleshwar Jyotirlinga in Ujjain, India", "match": "landmark", "evidence": "opened", "trackedUrl": "" },
+        "agoda": { "url": "https://www.agoda.com/en-in/hotels-near-mahakaleshwar-temple/attractions/ujjain-in.html", "title": "Hotels near Mahakaleshwar Temple, Ujjain", "match": "landmark", "evidence": "search + exists", "trackedUrl": "" },
+        "makemytrip": { "url": "https://www.makemytrip.com/hotels/ujjain-hotels-near-mahakal_lok.html", "title": "Hotels Near Mahakal Lok, Ujjain", "match": "landmark (Mahakal Lok corridor)", "evidence": "search", "trackedUrl": "" },
+        "goibibo": { "url": "https://www.goibibo.com/hotels/budget-hotels-near-mahakal-temple_ujjain-lc/", "title": "Budget Hotels near Mahakal Temple Ujjain", "match": "landmark, budget filter only (no general page found)", "evidence": "search", "trackedUrl": "" }
       }
     },
     "near-ram-ghat": {
       "subid": "area-near-ram-ghat",
       "links": {
-        "makemytrip": { "url": "https://www.makemytrip.com/hotels/ujjain-hotels-near-ram_ghat.html", "title": "Hotels in Ujjain - Hotels Near Ram Ghat", "match": "landmark", "evidence": "openseo (Google #1 for 'makemytrip hotels near ram ghat ujjain')" },
-        "goibibo": { "url": "https://www.goibibo.com/hotels/hotels-in-ujjain/near-ram-ghat-lh/", "title": "Hotels near Ram Ghat Ujjain", "match": "landmark", "evidence": "search" },
+        "makemytrip": { "url": "https://www.makemytrip.com/hotels/ujjain-hotels-near-ram_ghat.html", "title": "Hotels in Ujjain - Hotels Near Ram Ghat", "match": "landmark", "evidence": "openseo (Google #1 for 'makemytrip hotels near ram ghat ujjain')", "trackedUrl": "" },
+        "goibibo": { "url": "https://www.goibibo.com/hotels/hotels-in-ujjain/near-ram-ghat-lh/", "title": "Hotels near Ram Ghat Ujjain", "match": "landmark", "evidence": "search", "trackedUrl": "" },
         "bookingcom": { "url": null, "match": "none — use cityFallback", "evidence": "checked: /landmark/in/ram-ghat.html and ram-ghat-ujjain.html return 404" },
         "agoda": { "url": null, "match": "none — use cityFallback", "evidence": "checked: /en-in/hotels-near-ram-ghat/attractions/ujjain-in.html returns 404" }
       }
@@ -81,16 +92,16 @@
     "near-railway-station": {
       "subid": "area-near-railway-station",
       "links": {
-        "bookingcom": { "url": "https://www.booking.com/landmark/in/ujjain-junction-station.html", "title": "The 10 best hotels near Ujjain Junction Station in Ujjain, India", "match": "landmark", "evidence": "opened" },
-        "agoda": { "url": "https://www.agoda.com/en-in/hotels-near-ujjain-railway-station/attractions/ujjain-in.html", "title": "Hotels near Ujjain Railway Station, Ujjain", "match": "landmark", "evidence": "search + exists" },
-        "goibibo": { "url": "https://www.goibibo.com/hotels/hotels-in-ujjain/near-ujjain-junction-railway-station-lh/", "title": "Hotels near Ujjain Junction Railway Station Ujjain", "match": "landmark", "evidence": "search" },
+        "bookingcom": { "url": "https://www.booking.com/landmark/in/ujjain-junction-station.html", "title": "The 10 best hotels near Ujjain Junction Station in Ujjain, India", "match": "landmark", "evidence": "opened", "trackedUrl": "" },
+        "agoda": { "url": "https://www.agoda.com/en-in/hotels-near-ujjain-railway-station/attractions/ujjain-in.html", "title": "Hotels near Ujjain Railway Station, Ujjain", "match": "landmark", "evidence": "search + exists", "trackedUrl": "" },
+        "goibibo": { "url": "https://www.goibibo.com/hotels/hotels-in-ujjain/near-ujjain-junction-railway-station-lh/", "title": "Hotels near Ujjain Junction Railway Station Ujjain", "match": "landmark", "evidence": "search", "trackedUrl": "" },
         "makemytrip": { "url": null, "match": "none on the Indian site (only international makemytrip.global pages and a 5-star-only page) — use cityFallback", "evidence": "search + openseo" }
       }
     },
     "freeganj": {
       "subid": "area-freeganj",
       "links": {
-        "goibibo": { "url": "https://www.goibibo.com/hotels/hotels-in-ujjain/near-free-ganj-lh/", "title": "Hotels near Free Ganj Ujjain", "match": "area", "evidence": "search" },
+        "goibibo": { "url": "https://www.goibibo.com/hotels/hotels-in-ujjain/near-free-ganj-lh/", "title": "Hotels near Free Ganj Ujjain", "match": "area", "evidence": "search", "trackedUrl": "" },
         "makemytrip": { "url": null, "match": "none (only a 5-star-only page) — use cityFallback", "evidence": "search" },
         "agoda": { "url": null, "match": "none — use cityFallback", "evidence": "checked: /en-in/freeganj/maps/ujjain-in.html returns 404" },
         "bookingcom": { "url": null, "match": "none found — use cityFallback", "evidence": "search" }
@@ -99,17 +110,17 @@
     "nanakheda": {
       "subid": "area-nanakheda",
       "links": {
-        "makemytrip": { "url": "https://www.makemytrip.com/hotels/hotels-in-nanakheda-ujjain.html", "title": "Hotels in Nanakheda, Ujjain", "match": "area", "evidence": "search" },
-        "agoda": { "url": "https://www.agoda.com/en-in/nanakheda/maps/ujjain-in.html", "title": "Best Hotels in Nanakheda, Ujjain (Google also shows it as 'Mahakal Vanijya')", "match": "area", "evidence": "search + openseo + exists" },
-        "goibibo": { "url": "https://www.goibibo.com/hotels/budget-hotels-near-nana-kheda-bus-stand_ujjain-lc/", "title": "Budget Hotels near Nana Kheda Bus Stand Ujjain", "match": "bus stand, budget filter only (no general page found)", "evidence": "search" },
+        "makemytrip": { "url": "https://www.makemytrip.com/hotels/hotels-in-nanakheda-ujjain.html", "title": "Hotels in Nanakheda, Ujjain", "match": "area", "evidence": "search", "trackedUrl": "" },
+        "agoda": { "url": "https://www.agoda.com/en-in/nanakheda/maps/ujjain-in.html", "title": "Best Hotels in Nanakheda, Ujjain (Google also shows it as 'Mahakal Vanijya')", "match": "area", "evidence": "search + openseo + exists", "trackedUrl": "" },
+        "goibibo": { "url": "https://www.goibibo.com/hotels/budget-hotels-near-nana-kheda-bus-stand_ujjain-lc/", "title": "Budget Hotels near Nana Kheda Bus Stand Ujjain", "match": "bus stand, budget filter only (no general page found)", "evidence": "search", "trackedUrl": "" },
         "bookingcom": { "url": null, "match": "none found — use cityFallback", "evidence": "search" }
       }
     },
     "dewas-road": {
       "subid": "area-dewas-road",
       "links": {
-        "goibibo": { "url": "https://www.goibibo.com/hotels/hotels-in-ujjain/dewas-road-ah/", "title": "Hotels in Dewas Road Ujjain", "match": "area", "evidence": "search" },
-        "makemytrip": { "url": "https://www.makemytrip.com/hotels/hotels-in-dewas_road-ujjain.html", "title": "Hotels in Dewas Road, Ujjain", "match": "area (page listed very few properties when checked)", "evidence": "openseo" },
+        "goibibo": { "url": "https://www.goibibo.com/hotels/hotels-in-ujjain/dewas-road-ah/", "title": "Hotels in Dewas Road Ujjain", "match": "area", "evidence": "search", "trackedUrl": "" },
+        "makemytrip": { "url": "https://www.makemytrip.com/hotels/hotels-in-dewas_road-ujjain.html", "title": "Hotels in Dewas Road, Ujjain", "match": "area (page listed very few properties when checked)", "evidence": "openseo", "trackedUrl": "" },
         "agoda": { "url": null, "match": "none found — use cityFallback", "evidence": "search" },
         "bookingcom": { "url": null, "match": "none found — use cityFallback", "evidence": "search" }
       }
@@ -123,20 +134,20 @@
     "budget": {
       "subid": "cat-budget",
       "links": {
-        "bookingcom": { "url": "https://www.booking.com/budget/city/in/ujjain.html", "title": "The 10 best cheap hotels in Ujjain, India", "match": "category", "evidence": "opened" },
-        "agoda": { "url": "https://www.agoda.com/en-in/theme/cheap-hotels/city/ujjain-in.html", "title": "Best Budget Hotels in Ujjain", "match": "category", "evidence": "search + exists" }
+        "bookingcom": { "url": "https://www.booking.com/budget/city/in/ujjain.html", "title": "The 10 best cheap hotels in Ujjain, India", "match": "category", "evidence": "opened", "trackedUrl": "" },
+        "agoda": { "url": "https://www.agoda.com/en-in/theme/cheap-hotels/city/ujjain-in.html", "title": "Best Budget Hotels in Ujjain", "match": "category", "evidence": "search + exists", "trackedUrl": "" }
       }
     },
     "family": {
       "subid": "cat-family",
       "links": {
-        "bookingcom": { "url": "https://www.booking.com/family/city/in/ujjain.html", "title": "The 10 best family hotels in Ujjain, India", "match": "category", "evidence": "opened" }
+        "bookingcom": { "url": "https://www.booking.com/family/city/in/ujjain.html", "title": "The 10 best family hotels in Ujjain, India", "match": "category", "evidence": "opened", "trackedUrl": "" }
       }
     },
     "premium": {
       "subid": "cat-premium",
       "links": {
-        "bookingcom": { "url": "https://www.booking.com/luxury/city/in/ujjain.html", "title": "The 10 best luxury hotels in Ujjain, India", "match": "category (also /fourstars/city/in/ujjain.html, opened)", "evidence": "opened" }
+        "bookingcom": { "url": "https://www.booking.com/luxury/city/in/ujjain.html", "title": "The 10 best luxury hotels in Ujjain, India", "match": "category (also /fourstars/city/in/ujjain.html, opened)", "evidence": "opened", "trackedUrl": "" }
       }
     }
   },

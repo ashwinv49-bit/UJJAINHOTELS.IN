@@ -168,9 +168,11 @@ const pass = (m) => console.log(`  ✓ ${m}`);
       if (!(await page.locator('.placeholder-banner').isVisible())) fail('placeholder banner missing on placeholder profile');
       else pass('placeholder profile shows the PLACEHOLDER banner');
     } else {
-      // Live/preview mode: no verified hotels yet
-      if (!(await page.locator('text=No verified hotels here yet').count())) fail('/hotels/ empty state missing');
-      else pass('/hotels/ shows the empty state (no verified hotels yet)');
+      // Live/preview mode (affiliate-only phase): partner block, "coming soon" until links are tracked
+      if (!(await page.locator('[data-partner-soon], [data-partner-block]').count())) fail('/hotels/ partner block missing');
+      else pass('/hotels/ shows the booking-partner block');
+      if ((await page.locator('[data-partner-soon]').count()) && (await page.locator('a[rel~="sponsored"]').count()))
+        fail('partner buttons shown while the block says "coming soon"');
       if ((await page.locator('[data-placeholder]').count()) > 0) fail('placeholder content on a live-mode build');
       else pass('no placeholder content in live mode');
     }

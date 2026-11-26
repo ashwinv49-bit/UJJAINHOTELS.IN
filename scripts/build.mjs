@@ -26,6 +26,7 @@ import { execFileSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import * as H from './lib/hotels.mjs';
+import { partnerLinksFor, partnerLinkProblems } from './lib/partner-links.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SRC = path.join(ROOT, 'src');
@@ -257,6 +258,8 @@ function hotelPages(data) {
     ...(data.categories ?? []).map((c) => ({ ...c, rule: c.match, kind: 'category' })),
     ...(data.areas ?? []).map((a) => ({ ...a, rule: { area: a.slug }, kind: 'area' })),
   ];
+  // Affiliate partner links: only tracked, enabled, host-checked links are shown.
+  for (const p of partnerLinkProblems(data)) notices.push(p);
   const done = new Set();
   for (const c of collections) {
     if (!c.url || done.has(c.url)) continue; // categories win over areas with the same URL
@@ -269,7 +272,7 @@ function hotelPages(data) {
       path: c.url,
       title: withBrand(c.pageTitle ?? c.title),
       description: c.description ?? c.summary,
-      collection: { ...c, heading, intro: c.intro ?? c.summary, hotels },
+      collection: { ...c, heading, intro: c.intro ?? c.summary, hotels, partnerLinks: partnerLinksFor(c.kind === 'all' ? 'all' : c.slug, data) },
       crumbs,
       // Empty (or placeholder-only) collections are thin content: keep them out of search.
       noindex: realCount === 0,
