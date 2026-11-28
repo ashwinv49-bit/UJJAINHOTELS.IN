@@ -3,8 +3,8 @@
     "path": "/hotels/",
     "title": "Hotels in Ujjain by Area and Type",
     "heading": "Hotels in Ujjain",
-    "description": "Browse hotels in Ujjain by area, budget and facilities — near Mahakal Temple, Ram Ghat or the railway station. Every listing is checked with the property.",
-    "intro": "Every hotel here has been checked with the property. Filter by area, budget and facilities, then call or WhatsApp the hotel directly.",
+    "description": "Find hotels in Ujjain by area and type of stay — near Mahakal Temple, Ram Ghat or the railway station — then check rooms and prices on trusted booking sites.",
+    "intro": "Choose an area or type of stay, then check hotels, photos and prices on trusted booking sites.",
     "collection": "all"
   },
   {
@@ -33,15 +33,8 @@
     "path": "/contact/",
     "title": "Contact HotelsUjjain.in",
     "heading": "Contact us",
-    "description": "Contact HotelsUjjain.in for help finding a stay in Ujjain, or about listing your hotel.",
-    "intro": "WhatsApp enquiries and contact details are being set up."
-  },
-  {
-    "path": "/list-your-hotel/",
-    "title": "List Your Hotel on HotelsUjjain.in",
-    "heading": "List your hotel",
-    "description": "Own a hotel, guest house or dharamshala in Ujjain? Find out how to list it on HotelsUjjain.in.",
-    "intro": "Free and featured listing options for Ujjain hotels, guest houses and dharamshalas are being prepared."
+    "description": "Contact HotelsUjjain.in with questions about finding a stay in Ujjain or about this website.",
+    "intro": "Contact details are being set up."
   },
   {
     "path": "/advertise/",

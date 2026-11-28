@@ -1,6 +1,6 @@
 ---
 title: Hotels in Ujjain: Find Your Right Stay | HotelsUjjain.in
-description: Find hotels in Ujjain by area and type of stay — near Mahakal Temple, Ram Ghat or the railway station. Compare options and contact hotels directly.
+description: Find hotels in Ujjain by area — near Mahakal Temple, Ram Ghat or the railway station. Choose the right area, then check hotels on trusted booking sites.
 bodyClass: page-home
 ---
 <!-- 1. Hero + discovery search -->
@@ -10,7 +10,7 @@ bodyClass: page-home
     <div class="hero__copy">
       <p class="eyebrow">Ujjain · Madhya Pradesh</p>
       <h1 class="hero__title" id="hero-title">Find your right stay in <em>Ujjain</em></h1>
-      <p class="hero__lede">Discover places to stay near Mahakal Temple, the Shipra ghats or the railway station — then contact hotels directly, with no fees to enquire.</p>
+      <p class="hero__lede">Discover the right area to stay — near Mahakal Temple, the Shipra ghats or the railway station — then check hotels and prices on trusted booking sites.</p>
     </div>
     {{> search-form }}
   </div>
@@ -21,8 +21,8 @@ bodyClass: page-home
   <div class="container">
     <ul class="trust-strip__list" role="list">
       <li class="trust-strip__item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-temple"></use></svg>Built only for Ujjain</li>
-      <li class="trust-strip__item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-chat"></use></svg>No fees to enquire</li>
-      <li class="trust-strip__item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-eye"></use></svg>Paid listings are always labelled</li>
+      <li class="trust-strip__item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg>Free to use — we don’t take bookings or payments</li>
+      <li class="trust-strip__item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-eye"></use></svg>Partner links are always labelled</li>
     </ul>
   </div>
 </section>
@@ -41,22 +41,7 @@ bodyClass: page-home
   </div>
 </section>
 
-<!-- 3. Featured hotels (SAMPLE CONTENT) -->
-<section class="section section--white" aria-labelledby="featured-title">
-  <div class="container">
-    <div class="section-head">
-      <div class="section-head__text">
-        <p class="eyebrow">Featured stays</p>
-        <h2 id="featured-title">Featured places to stay</h2>
-        <p>Featured listings are paid placements and are always labelled. Every listing will show where its details came from and when they were last checked.</p>
-      </div>
-      <a class="link-arrow" href="/hotels/">Browse all stays <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></a>
-    </div>
-    {{> featured-hotels }}
-  </div>
-</section>
-
-<!-- 4. Popular areas -->
+<!-- 3. Popular areas -->
 <section class="section" id="areas" aria-labelledby="areas-title">
   <div class="container">
     <div class="section-head">
@@ -71,14 +56,14 @@ bodyClass: page-home
   </div>
 </section>
 
-<!-- 5. Why choose us -->
+<!-- 4. Why choose us -->
 <section class="section section--dark on-dark" aria-labelledby="why-title">
   <div class="container">
     <div class="section-head">
       <div class="section-head__text">
         <p class="eyebrow">Why HotelsUjjain.in</p>
         <h2 id="why-title">A clearer way to choose where to stay</h2>
-        <p>We are a discovery guide, not a booking engine. Our job is to help you decide — then put you in touch.</p>
+        <p>We are a discovery guide, not a booking engine. Our job is to help you choose the right area — then send you to trusted booking sites to compare hotels and book.</p>
       </div>
     </div>
     <ul class="why-grid" role="list">
@@ -93,20 +78,20 @@ bodyClass: page-home
         <p>Area guides and temple-visit planning written for pilgrims, families and travellers coming to Ujjain.</p>
       </li>
       <li class="why-item">
-        <svg class="icon why-item__icon" aria-hidden="true" focusable="false"><use href="#i-whatsapp"></use></svg>
-        <h3>Talk to hotels directly</h3>
-        <p>Ask questions and confirm rates with the hotel yourself. We never charge you to enquire.</p>
+        <svg class="icon why-item__icon" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg>
+        <h3>Book on trusted sites</h3>
+        <p>Pick your area here, then compare hotels, photos and prices on well-known booking sites. You book and pay there, not with us.</p>
       </li>
       <li class="why-item">
         <svg class="icon why-item__icon" aria-hidden="true" focusable="false"><use href="#i-shield-check"></use></svg>
         <h3>Transparent by design</h3>
-        <p>Paid placements are labelled, affiliate links are disclosed, and we never invent prices, ratings or reviews.</p>
+        <p>Partner links are labelled and disclosed, and we never invent prices, ratings or reviews.</p>
       </li>
     </ul>
   </div>
 </section>
 
-<!-- 6. Travel guide preview -->
+<!-- 5. Travel guide preview -->
 <section class="section" aria-labelledby="guides-title">
   <div class="container">
     <div class="section-head">
@@ -121,19 +106,16 @@ bodyClass: page-home
   </div>
 </section>
 
-<!-- 7. Hotel owners -->
+<!-- 6. Hotel owners: register interest (listings open later) -->
 <section class="section section--white" aria-labelledby="owners-title">
   <div class="container">
     <div class="cta-band">
       <div>
         <p class="eyebrow">For hotel owners</p>
         <h2 id="owners-title">Own a hotel, guest house or dharamshala in Ujjain?</h2>
-        <p>Reach visitors while they are choosing where to stay. Free and featured listing options are being prepared.</p>
+        <p>Hotel listings on HotelsUjjain.in will open later. Register your interest now and we will contact you when they do.</p>
       </div>
-      <div class="cluster">
-        <a class="btn btn--dark" href="/list-your-hotel/">List your hotel</a>
-        <a class="btn btn--ghost" href="/advertise/">Advertise with us</a>
-      </div>
+      {{> owner-cta learn-more="true" }}
     </div>
   </div>
 </section>

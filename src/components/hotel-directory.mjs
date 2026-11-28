@@ -1,10 +1,14 @@
 import { esc, icon } from './_lib.mjs';
 import { listingCard } from './featured-hotels.mjs';
+import { partnerBlock } from './partner-links.mjs';
 
 /**
- * Collection page body (/hotels/, categories, areas). Every matching hotel is
- * rendered into the HTML (works without JS, good for SEO); the filter form is
- * revealed by main.js and only hides/shows cards.
+ * Collection page body (/hotels/, categories, areas).
+ * Current phase (owner, 25 Nov 2026): affiliate links only — every page shows
+ * the partner booking block. Hotel listings are dormant: the hotel list below
+ * only appears if verified hotel records are ever added again. Every matching
+ * hotel is rendered into the HTML (works without JS, good for SEO); the filter
+ * form is revealed by main.js and only hides/shows cards.
  */
 export default function hotelDirectory({ page, data }) {
   const c = page.collection;
@@ -23,25 +27,13 @@ export default function hotelDirectory({ page, data }) {
   </div>
 </section>`;
 
-  if (!hotels.length) {
-    const second = c.kind === 'all'
-      ? '<a class="btn btn--ghost" href="/#areas">Explore areas</a>'
-      : '<a class="btn btn--ghost" href="/hotels/">See all hotels</a>';
-    return `${hero}
-<section class="section">
+  const partners = `<section class="section partner-section">
   <div class="container container--narrow">
-    <div class="coming-soon">
-      <span class="badge badge--soft">No listings yet</span>
-      <h2>No verified hotels here yet</h2>
-      <p>We list a hotel only after checking its details with the property. Verified hotels will appear on this page as soon as they are confirmed.</p>
-      <div class="cluster">
-        <a class="btn btn--dark" href="/list-your-hotel/">List your hotel</a>
-        ${second}
-      </div>
-    </div>
+    ${partnerBlock(c.partnerLinks ?? [], c)}
   </div>
 </section>`;
-  }
+
+  if (!hotels.length) return `${hero}\n${partners}`;
 
   // Only offer filters that can change the result on this page.
   const rule = c.rule ?? {};
@@ -99,6 +91,7 @@ export default function hotelDirectory({ page, data }) {
 
   const word = (n) => `${n} verified hotel${n === 1 ? '' : 's'}`;
   return `${hero}
+${partners}
 <section class="section hotel-directory">
   <div class="container">
     ${filters}

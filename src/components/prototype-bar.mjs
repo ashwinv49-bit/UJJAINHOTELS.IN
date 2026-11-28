@@ -5,7 +5,7 @@ export default function prototypeBar({ site }) {
   if (!site.prototype) return '';
   const text = site.showSamples
     ? 'listings shown are labelled samples, not real hotels.'
-    : 'hotel listings are being added.';
+    : 'this guide is still being built.';
   return `<div class="proto-bar" role="note">
   <div class="container">${icon('info')}<span><strong>Prototype preview:</strong> ${text}</span></div>
 </div>`;

@@ -1,6 +1,6 @@
 # Affiliate business model: HotelsUjjain.in
 
-**Status:** plan for approval · researched 21 Nov 2026
+**Status:** researched 21 Nov 2026 · **Update 25 Nov 2026:** affiliate links are now the **only** income in the current phase (hotel listings, paid placements and advertising paused; `docs/DECISIONS.md` #21). Joined Cuelinks; trying EarnKaro (Goibibo) and INRDeals (MakeMyTrip) because they allow area deep links (`docs/AFFILIATE-LINKS.md` §0).
 **Important:** commission figures below come mostly from third-party listings and conflict with each other. Treat them as ranges and confirm the live rate inside each partner dashboard before relying on it.
 
 ---

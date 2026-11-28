@@ -5,7 +5,12 @@ Read this before doing any work in this repository. These are the owner's standi
 ## What we are building
 - **HotelsUjjain.in** (brand **HOTELS UJJAIN**, tagline **"Find Your Right Stay."**): a premium, mobile-first **hotel discovery** platform for Ujjain, Madhya Pradesh, India.
 - **It is NOT an online travel agency.** Never build payment processing, booking inventory, room availability or reservation management.
-- Revenue: hotel **affiliate commissions**, **paid hotel listings** (always labelled), **direct WhatsApp enquiries**, **local advertising**.
+- Revenue (long term): hotel **affiliate commissions**, **paid hotel listings** (always labelled), **direct WhatsApp enquiries**, **local advertising**.
+- **Current phase (owner's decision, 25 Nov 2026): affiliate links only.**
+  - Visitors choose an area here, then go to booking partners through labelled partner links (`data/affiliate-areas.json` → `trackedUrl`, shown by `scripts/lib/partner-links.mjs` only when tracked and the partner is enabled).
+  - Hotel owners can **register interest on WhatsApp** (`/list-your-hotel/`); listings open later.
+  - **Digital PDF guides** are planned (third-party checkout only; product and platform not yet chosen).
+  - **Paused** until the owner restarts them: hotel listings, paid placements, traveller WhatsApp enquiries, advertising. The hotel-listing code stays in place, dormant (it shows nothing without verified records).
 - Platform: custom HTML, CSS and JavaScript with a small zero-dependency build (`scripts/build.mjs`). No frameworks without the owner's approval.
 
 ## Non-negotiable rules
