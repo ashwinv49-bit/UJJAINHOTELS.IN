@@ -129,6 +129,45 @@ Each area also has a **sub-ID** ready (e.g. `area-near-ram-ghat`). Cuelinks allo
 
 - **Tax:** ask a CA about GST and income tax on digital sales.
 
+## 7. Which booking apps people use (research, 28 Nov 2026)
+
+**India overall** (directional; consultancy guides, Similarweb snapshots, company reports):
+- **MakeMyTrip + Goibibo (one company)** lead online hotel bookings, with estimates of 55–60% or more (not audited).
+- **Booking.com** is a clear #2 and very strong on Google. **Agoda** is growing. **OYO** is big in budget rooms.
+- **Android usage rank** (Similarweb, India travel apps, 9 Nov): MakeMyTrip #9 · Booking.com #21 · OYO #22 · ixigo #31 · Cleartrip #45.
+- **Pilgrim trips** (MakeMyTrip, FY25): stays up 19%, and about **2 in 3 booked within a week of travel**.
+
+**Ujjain: Google searches "brand + Ujjain"** (OpenSEO, India, monthly, directional):
+
+| Search | Per month |
+|---|---|
+| airbnb ujjain | 2,900 |
+| oyo ujjain (+ "oyo hotels in ujjain" 390) | 1,000 |
+| booking.com ujjain | 590 |
+| agoda ujjain | 480 |
+| treebo ujjain | 260 |
+| goibibo ujjain | 110 |
+| makemytrip ujjain | 50 |
+| mp tourism ujjain hotel booking | 20 |
+
+**Caveats:**
+- MakeMyTrip/Goibibo users mostly search **inside the app**, so Google undercounts them.
+- Our visitors come **from Google**, and among them OYO, Booking.com and Agoda are strong.
+
+**Affiliate availability:**
+- **Airbnb:** public programme **ended in 2021**; Airbnb's help page says "select partners only". **Skip.**
+- **OYO:** EarnKaro reports **10% per booking**, status unconfirmed (Cuelinks OYO paused).
+- **Treebo:** not researched.
+
+**Partner priority:**
+1. Goibibo (EarnKaro, now)
+2. MakeMyTrip (INRDeals)
+3. OYO (EarnKaro, if active and "Make Link" accepts an OYO Ujjain page)
+4. Booking.com (CJ) + Agoda, once the site has real content
+5. No Airbnb
+
+**⚠️ App test:** EarnKaro tracks Goibibo on **web/mobile web only**. Tap the Ram Ghat profit link on your phone and note whether it opens the browser or the Goibibo app. An app booking might not be paid; check EarnKaro reports after a test.
+
 ## Sources (22 Nov 2026)
 - Cuelinks campaign pages: [MakeMyTrip (Hotels)](https://www.cuelinks.com/campaigns/makemytrip-homestays-affiliate-program) · [Goibibo](https://www.cuelinks.com/campaigns/goibibo-affiliate-program) · [Agoda](https://www.cuelinks.com/campaigns/agoda-affiliate-program) · [OYO](https://www.cuelinks.com/campaigns/oyo-rooms-affiliate-program)
 - Partner pages: the links in the table (found via web search and an OpenSEO Google check, India, 22 Nov 2026; about 20 OpenSEO credits used)
